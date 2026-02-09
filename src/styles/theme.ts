@@ -2,7 +2,7 @@
  * FeedbackKit Theme
  */
 
-import { FeedbackStatus, FeedbackCategory } from '@feedbackkit/js';
+import { FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
 
 /**
  * Status colors mapping

@@ -5,7 +5,7 @@
  */
 
 import { useState, useCallback } from 'react';
-import { VoteResponse, FeedbackKitError } from '@feedbackkit/js';
+import { VoteResponse, FeedbackKitError } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 
 export interface UseVoteOptions {

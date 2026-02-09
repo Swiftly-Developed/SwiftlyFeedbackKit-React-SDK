@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { FeedbackCategory } from '@feedbackkit/js';
+import { FeedbackCategory } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { getCategoryColor, getCategoryDisplayName } from '../styles/theme';
 

@@ -10,7 +10,7 @@ import {
   FeedbackStatus,
   FeedbackCategory,
   FeedbackKitError
-} from '@feedbackkit/js';
+} from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 
 export interface FeedbackListFilter {

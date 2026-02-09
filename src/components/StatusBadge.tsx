@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { FeedbackStatus } from '@feedbackkit/js';
+import { FeedbackStatus } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { getStatusColor, getStatusDisplayName } from '../styles/theme';
 

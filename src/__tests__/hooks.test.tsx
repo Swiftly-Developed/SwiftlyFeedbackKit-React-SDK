@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react-native';
 import { FeedbackKitProvider } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { useVote } from '../hooks/useVote';
-import { FeedbackStatus, FeedbackCategory } from '@feedbackkit/js';
+import { FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
 
 // Wrapper component for hooks
 const wrapper = ({ children }: { children: React.ReactNode }) => (

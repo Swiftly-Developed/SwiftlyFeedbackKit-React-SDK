@@ -13,7 +13,7 @@ import {
   ActivityIndicator,
   View
 } from 'react-native';
-import { Feedback, FeedbackStatus } from '@feedbackkit/js';
+import { Feedback, FeedbackStatus } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useVote } from '../hooks/useVote';
 

@@ -1,4 +1,4 @@
-// Mock for @feedbackkit/js
+// Mock for feedbackkit-js
 
 export enum FeedbackStatus {
   Pending = 'pending',

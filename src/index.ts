@@ -5,7 +5,7 @@
  */
 
 // Re-export everything from the JS SDK
-export * from '@feedbackkit/js';
+export * from 'feedbackkit-js';
 
 // Provider
 export { FeedbackProvider, type FeedbackProviderProps, type FeedbackKitTheme, useFeedbackKitContext } from './provider';

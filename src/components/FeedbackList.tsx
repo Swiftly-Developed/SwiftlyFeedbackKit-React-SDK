@@ -15,7 +15,7 @@ import {
   ActivityIndicator,
   ViewStyle
 } from 'react-native';
-import { Feedback, FeedbackStatus, FeedbackCategory } from '@feedbackkit/js';
+import { Feedback, FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { FeedbackCard } from './FeedbackCard';

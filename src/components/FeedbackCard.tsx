@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   ViewStyle
 } from 'react-native';
-import { Feedback } from '@feedbackkit/js';
+import { Feedback } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { StatusBadge } from './StatusBadge';
 import { CategoryBadge } from './CategoryBadge';

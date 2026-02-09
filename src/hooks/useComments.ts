@@ -5,7 +5,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { Comment, FeedbackKitError } from '@feedbackkit/js';
+import { Comment, FeedbackKitError } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 
 export interface UseCommentsResult {

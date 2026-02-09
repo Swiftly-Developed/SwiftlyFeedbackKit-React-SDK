@@ -5,7 +5,7 @@
  */
 
 import { useFeedbackKitContext } from '../provider';
-import { FeedbackKit } from '@feedbackkit/js';
+import { FeedbackKit } from 'feedbackkit-js';
 
 /**
  * Hook to access the FeedbackKit client

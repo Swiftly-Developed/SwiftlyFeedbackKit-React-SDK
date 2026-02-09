@@ -5,7 +5,7 @@
  */
 
 import React, { createContext, useContext, useMemo, useEffect, useState } from 'react';
-import { FeedbackKit, FeedbackKitConfig } from '@feedbackkit/js';
+import { FeedbackKit, FeedbackKitConfig } from 'feedbackkit-js';
 import { Theme, defaultTheme, mergeTheme } from './styles/theme';
 import { getUserId, setUserId as persistUserId } from './utils/storage';
 
