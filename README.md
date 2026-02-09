@@ -14,7 +14,7 @@ A complete React Native SDK for integrating FeedbackKit into your mobile apps. B
 ## Installation
 
 ```bash
-npm install @feedbackkit/react-native @feedbackkit/js @react-native-async-storage/async-storage
+npm install feedbackkit-react-native feedbackkit-js @react-native-async-storage/async-storage
 ```
 
 ### Peer Dependencies
@@ -23,7 +23,7 @@ This package requires the following peer dependencies:
 
 ```json
 {
-  "@feedbackkit/js": "^1.0.0",
+  "feedbackkit-js": "^1.0.0",
   "react": ">=18.0.0",
   "react-native": ">=0.70.0",
   "@react-native-async-storage/async-storage": ">=1.17.0"
@@ -35,7 +35,7 @@ This package requires the following peer dependencies:
 ### 1. Wrap your app with the provider
 
 ```tsx
-import { FeedbackKitProvider } from '@feedbackkit/react-native';
+import { FeedbackKitProvider } from 'feedbackkit-react-native';
 
 function App() {
   return (
@@ -52,7 +52,7 @@ function App() {
 ### 2. Display the feedback list
 
 ```tsx
-import { FeedbackList } from '@feedbackkit/react-native';
+import { FeedbackList } from 'feedbackkit-react-native';
 
 function FeedbackScreen({ navigation }) {
   return (
@@ -206,7 +206,7 @@ const feedbacks = await client.feedback.list();
 ### Using built-in themes
 
 ```tsx
-import { FeedbackKitProvider, darkTheme } from '@feedbackkit/react-native';
+import { FeedbackKitProvider, darkTheme } from 'feedbackkit-react-native';
 
 <FeedbackKitProvider
   apiKey="..."
@@ -218,7 +218,7 @@ import { FeedbackKitProvider, darkTheme } from '@feedbackkit/react-native';
 ### Custom theme
 
 ```tsx
-import { FeedbackKitProvider, createTheme } from '@feedbackkit/react-native';
+import { FeedbackKitProvider, createTheme } from 'feedbackkit-react-native';
 
 const customTheme = createTheme({
   primaryColor: '#6366F1',
@@ -287,7 +287,7 @@ import type {
   FeedbackCategory,
   FeedbackKitTheme,
   FeedbackListProps
-} from '@feedbackkit/react-native';
+} from 'feedbackkit-react-native';
 ```
 
 ## License
