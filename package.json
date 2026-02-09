@@ -1,6 +1,6 @@
 {
   "name": "feedbackkit-react-native",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FeedbackKit React Native SDK - Collect user feedback in your React Native apps",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
