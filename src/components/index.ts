@@ -7,3 +7,5 @@ export { CategoryBadge, type CategoryBadgeProps } from './CategoryBadge';
 export { VoteButton, type VoteButtonProps } from './VoteButton';
 export { FeedbackCard, type FeedbackCardProps } from './FeedbackCard';
 export { FeedbackList, type FeedbackListProps } from './FeedbackList';
+export { SubmitFeedbackView, type SubmitFeedbackViewProps } from './SubmitFeedbackView';
+export { FeedbackDetailView, type FeedbackDetailViewProps } from './FeedbackDetailView';

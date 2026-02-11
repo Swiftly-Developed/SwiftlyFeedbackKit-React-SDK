@@ -8,6 +8,7 @@ import React, { createContext, useContext, useMemo, useEffect, useState } from '
 import { FeedbackKit, FeedbackKitConfig } from 'feedbackkit-js';
 import { Theme, defaultTheme, mergeTheme } from './styles/theme';
 import { getUserId, setUserId as persistUserId } from './utils/storage';
+import { setLocale, setOverrideStrings } from './i18n';
 
 /**
  * Theme configuration for FeedbackKit components
@@ -26,6 +27,10 @@ export interface FeedbackProviderProps {
   userId?: string;
   /** Theme customization */
   theme?: FeedbackKitTheme;
+  /** Override locale (auto-detected from device by default) */
+  locale?: string;
+  /** Override specific translation strings */
+  translations?: Record<string, string>;
   /** Children components */
   children: React.ReactNode;
 }
@@ -77,6 +82,8 @@ export function FeedbackProvider({
   baseUrl,
   userId: initialUserId,
   theme: themeOverrides,
+  locale,
+  translations,
   children
 }: FeedbackProviderProps) {
   const [userId, setUserIdState] = useState<string | undefined>(initialUserId);
@@ -95,6 +102,15 @@ export function FeedbackProvider({
   const theme = useMemo(() => {
     return mergeTheme(defaultTheme, themeOverrides);
   }, [themeOverrides]);
+
+  // Apply locale and translation overrides
+  useEffect(() => {
+    if (locale) setLocale(locale);
+  }, [locale]);
+
+  useEffect(() => {
+    if (translations) setOverrideStrings(translations);
+  }, [translations]);
 
   // Load persisted user ID on mount
   useEffect(() => {

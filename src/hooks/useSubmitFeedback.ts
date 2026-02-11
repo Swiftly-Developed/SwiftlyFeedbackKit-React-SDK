@@ -17,6 +17,10 @@ export interface SubmitFeedbackData {
   category: FeedbackCategory;
   /** Optional email for notifications */
   userEmail?: string;
+  /** Whether the user consents to join the project's mailing list */
+  subscribeToMailingList?: boolean;
+  /** Email preference types (e.g. ["operational", "marketing"]). Defaults to both when omitted. */
+  mailingListEmailTypes?: string[];
 }
 
 export interface UseSubmitFeedbackResult {
@@ -87,7 +91,9 @@ export function useSubmitFeedback(): UseSubmitFeedbackResult {
           description: data.description,
           category: data.category,
           userId,
-          userEmail: data.userEmail
+          userEmail: data.userEmail,
+          subscribeToMailingList: data.userEmail ? data.subscribeToMailingList : undefined,
+          mailingListEmailTypes: data.userEmail && data.subscribeToMailingList ? data.mailingListEmailTypes : undefined
         });
         return feedback;
       } catch (err) {

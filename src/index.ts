@@ -31,7 +31,11 @@ export {
   FeedbackCard,
   type FeedbackCardProps,
   FeedbackList,
-  type FeedbackListProps
+  type FeedbackListProps,
+  SubmitFeedbackView,
+  type SubmitFeedbackViewProps,
+  FeedbackDetailView,
+  type FeedbackDetailViewProps
 } from './components';
 
 // Theme
@@ -45,3 +49,13 @@ export {
   getCategoryColor,
   getCategoryDisplayName
 } from './styles/theme';
+
+// Internationalization
+export {
+  t,
+  setLocale,
+  getLocale,
+  registerTranslations,
+  setOverrideStrings,
+  en
+} from './i18n';

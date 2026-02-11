@@ -17,6 +17,7 @@ import { useFeedbackKitContext } from '../provider';
 import { StatusBadge } from './StatusBadge';
 import { CategoryBadge } from './CategoryBadge';
 import { VoteButton } from './VoteButton';
+import { t } from '../i18n';
 
 export interface FeedbackCardProps {
   /** The feedback item to display */
@@ -109,7 +110,7 @@ export function FeedbackCard({
       {showCommentCount && feedback.commentCount > 0 && (
         <View style={styles.footer}>
           <Text style={[styles.commentCount, { color: theme.secondaryTextColor }]}>
-            💬 {feedback.commentCount} comment{feedback.commentCount !== 1 ? 's' : ''}
+            {'💬 '}{feedback.commentCount} {feedback.commentCount !== 1 ? t('comment.other') : t('comment.one')}
           </Text>
         </View>
       )}

@@ -150,26 +150,28 @@ export function getCategoryColor(category: FeedbackCategory, theme: Theme): stri
  * Get display name for a status
  */
 export function getStatusDisplayName(status: FeedbackStatus): string {
-  const names: Record<FeedbackStatus, string> = {
-    [FeedbackStatus.Pending]: 'Pending',
-    [FeedbackStatus.Approved]: 'Approved',
-    [FeedbackStatus.InProgress]: 'In Progress',
-    [FeedbackStatus.TestFlight]: 'TestFlight',
-    [FeedbackStatus.Completed]: 'Completed',
-    [FeedbackStatus.Rejected]: 'Rejected'
+  const { t } = require('../i18n');
+  const keys: Record<FeedbackStatus, string> = {
+    [FeedbackStatus.Pending]: 'status.pending',
+    [FeedbackStatus.Approved]: 'status.approved',
+    [FeedbackStatus.InProgress]: 'status.inProgress',
+    [FeedbackStatus.TestFlight]: 'status.testflight',
+    [FeedbackStatus.Completed]: 'status.completed',
+    [FeedbackStatus.Rejected]: 'status.rejected'
   };
-  return names[status];
+  return t(keys[status]);
 }
 
 /**
  * Get display name for a category
  */
 export function getCategoryDisplayName(category: FeedbackCategory): string {
-  const names: Record<FeedbackCategory, string> = {
-    [FeedbackCategory.FeatureRequest]: 'Feature Request',
-    [FeedbackCategory.BugReport]: 'Bug Report',
-    [FeedbackCategory.Improvement]: 'Improvement',
-    [FeedbackCategory.Other]: 'Other'
+  const { t } = require('../i18n');
+  const keys: Record<FeedbackCategory, string> = {
+    [FeedbackCategory.FeatureRequest]: 'category.featureRequest',
+    [FeedbackCategory.BugReport]: 'category.bugReport',
+    [FeedbackCategory.Improvement]: 'category.improvement',
+    [FeedbackCategory.Other]: 'category.other'
   };
-  return names[category];
+  return t(keys[category]);
 }

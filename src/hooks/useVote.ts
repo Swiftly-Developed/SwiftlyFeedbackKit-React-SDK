@@ -13,6 +13,10 @@ export interface UseVoteOptions {
   email?: string;
   /** Opt-in to receive notifications when status changes */
   notifyStatusChange?: boolean;
+  /** Whether the user consents to join the project's mailing list */
+  subscribeToMailingList?: boolean;
+  /** Email preference types (e.g. ["operational", "marketing"]). Defaults to both when omitted. */
+  mailingListEmailTypes?: string[];
 }
 
 export interface UseVoteResult {
@@ -76,7 +80,9 @@ export function useVote(): UseVoteResult {
         const result = await client.votes.vote(feedbackId, {
           userId,
           email: options?.email,
-          notifyStatusChange: options?.notifyStatusChange
+          notifyStatusChange: options?.notifyStatusChange,
+          subscribeToMailingList: options?.email ? options?.subscribeToMailingList : undefined,
+          mailingListEmailTypes: options?.email && options?.subscribeToMailingList ? options?.mailingListEmailTypes : undefined
         });
         return result;
       } catch (err) {

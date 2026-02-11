@@ -19,6 +19,7 @@ import { Feedback, FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { FeedbackCard } from './FeedbackCard';
+import { t } from '../i18n';
 
 export interface FeedbackListProps {
   /** Called when a feedback item is pressed */
@@ -96,7 +97,7 @@ export function FeedbackList({
           </Text>
           <TouchableOpacity onPress={refetch} style={styles.retryButton}>
             <Text style={[styles.retryText, { color: theme.primaryColor }]}>
-              Tap to retry
+              {t('feedback.list.error.retry')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -110,10 +111,10 @@ export function FeedbackList({
     return (
       <View style={styles.centerContainer}>
         <Text style={[styles.emptyTitle, { color: theme.textColor }]}>
-          No feedback yet
+          {t('feedback.list.empty')}
         </Text>
         <Text style={[styles.emptySubtitle, { color: theme.secondaryTextColor }]}>
-          Be the first to share your ideas!
+          {t('feedback.list.empty.description')}
         </Text>
         {showAddButton && onAddPress && (
           <TouchableOpacity
@@ -123,7 +124,7 @@ export function FeedbackList({
               { backgroundColor: theme.primaryColor, borderRadius: theme.borderRadius }
             ]}
           >
-            <Text style={styles.addButtonText}>Submit Feedback</Text>
+            <Text style={styles.addButtonText}>{t('feedback.submit.title')}</Text>
           </TouchableOpacity>
         )}
       </View>
