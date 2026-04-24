@@ -78,6 +78,13 @@ export const en: Record<string, string> = {
   'time.monthsAgo': 'mo ago',
   'time.yearsAgo': 'y ago',
 
+  // Sort
+  'sort.label': 'Sort',
+  'sort.votes': 'Most Votes',
+  'sort.newest': 'Newest',
+  'sort.oldest': 'Oldest',
+  'sort.comments': 'Most Comments',
+
   // Errors
   'error.title': 'Error',
   'error.ok': 'OK',

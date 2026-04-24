@@ -9,6 +9,7 @@ import {
   Feedback,
   FeedbackStatus,
   FeedbackCategory,
+  FeedbackSort,
   FeedbackKitError
 } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
@@ -17,6 +18,7 @@ export interface FeedbackListFilter {
   status?: FeedbackStatus;
   category?: FeedbackCategory;
   includeMerged?: boolean;
+  sort?: FeedbackSort;
 }
 
 export interface UseFeedbackListResult {
@@ -84,7 +86,8 @@ export function useFeedbackList(
       const result = await client.feedback.list({
         status: filter.status,
         category: filter.category,
-        includeMerged: filter.includeMerged
+        includeMerged: filter.includeMerged,
+        sort: filter.sort
       });
       setFeedbacks(result);
     } catch (err) {

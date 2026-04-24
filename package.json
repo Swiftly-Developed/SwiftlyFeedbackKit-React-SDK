@@ -1,6 +1,6 @@
 {
   "name": "feedbackkit-react-native",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "FeedbackKit React Native SDK - Collect user feedback in your React Native apps",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -37,7 +37,7 @@
     "type": "git",
     "url": "git+https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-RN.git"
   },
-  "author": "Swiftly Developed",
+  "author": "Swiftly Developed <info@swiftly-developed.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-RN/issues"

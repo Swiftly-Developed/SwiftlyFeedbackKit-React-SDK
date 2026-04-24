@@ -15,7 +15,7 @@ import {
   ActivityIndicator,
   ViewStyle
 } from 'react-native';
-import { Feedback, FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
+import { Feedback, FeedbackStatus, FeedbackCategory, FeedbackSort } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { FeedbackCard } from './FeedbackCard';
@@ -28,6 +28,10 @@ export interface FeedbackListProps {
   filterByStatus?: FeedbackStatus;
   /** Filter by category */
   filterByCategory?: FeedbackCategory;
+  /** Initial sort order (defaults to votes) */
+  sortBy?: FeedbackSort;
+  /** Whether to show the sort picker */
+  showSortPicker?: boolean;
   /** Whether to show the add button */
   showAddButton?: boolean;
   /** Called when add button is pressed */
@@ -55,10 +59,19 @@ export interface FeedbackListProps {
  * />
  * ```
  */
+const SORT_OPTIONS: { value: FeedbackSort; labelKey: string }[] = [
+  { value: FeedbackSort.Votes, labelKey: 'sort.votes' },
+  { value: FeedbackSort.Newest, labelKey: 'sort.newest' },
+  { value: FeedbackSort.Oldest, labelKey: 'sort.oldest' },
+  { value: FeedbackSort.Comments, labelKey: 'sort.comments' },
+];
+
 export function FeedbackList({
   onFeedbackPress,
   filterByStatus,
   filterByCategory,
+  sortBy,
+  showSortPicker = true,
   showAddButton = false,
   onAddPress,
   emptyComponent,
@@ -67,10 +80,17 @@ export function FeedbackList({
   contentContainerStyle
 }: FeedbackListProps) {
   const { theme } = useFeedbackKitContext();
-  const { feedbacks, isLoading, error, refetch } = useFeedbackList({
+  const { feedbacks, isLoading, error, refetch, filter, setFilter } = useFeedbackList({
     status: filterByStatus,
-    category: filterByCategory
+    category: filterByCategory,
+    sort: sortBy
   });
+
+  const activeSort = filter.sort ?? FeedbackSort.Votes;
+
+  const handleSortChange = (sort: FeedbackSort) => {
+    setFilter({ ...filter, sort });
+  };
 
   const renderItem = ({ item }: { item: Feedback }) => (
     <FeedbackCard
@@ -131,6 +151,41 @@ export function FeedbackList({
     );
   };
 
+  const sortPicker = showSortPicker && feedbacks.length > 0 ? (
+    <View style={[styles.sortRow, { paddingHorizontal: theme.spacing * 2 }]}>
+      <Text style={[styles.sortLabel, { color: theme.secondaryTextColor }]}>
+        {t('sort.label')}
+      </Text>
+      <View style={styles.sortOptions}>
+        {SORT_OPTIONS.map((option) => {
+          const isActive = option.value === activeSort;
+          return (
+            <TouchableOpacity
+              key={option.value}
+              onPress={() => handleSortChange(option.value)}
+              style={[
+                styles.sortChip,
+                {
+                  backgroundColor: isActive ? theme.primaryColor : '#F0F0F0',
+                  borderRadius: theme.borderRadius
+                }
+              ]}
+            >
+              <Text
+                style={[
+                  styles.sortChipText,
+                  { color: isActive ? '#FFFFFF' : theme.secondaryTextColor }
+                ]}
+              >
+                {t(option.labelKey)}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    </View>
+  ) : null;
+
   return (
     <View style={[styles.container, { backgroundColor: theme.backgroundColor }, style]}>
       <FlatList
@@ -143,7 +198,12 @@ export function FeedbackList({
           feedbacks.length === 0 && styles.emptyListContent,
           contentContainerStyle
         ]}
-        ListHeaderComponent={ListHeaderComponent}
+        ListHeaderComponent={
+          <>
+            {ListHeaderComponent}
+            {sortPicker}
+          </>
+        }
         ListEmptyComponent={renderEmpty}
         refreshControl={
           <RefreshControl
@@ -242,5 +302,28 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '400',
     marginTop: -2
+  },
+  sortRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+    gap: 8
+  },
+  sortLabel: {
+    fontSize: 13,
+    fontWeight: '600'
+  },
+  sortOptions: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 6
+  },
+  sortChip: {
+    paddingHorizontal: 10,
+    paddingVertical: 5
+  },
+  sortChipText: {
+    fontSize: 12,
+    fontWeight: '500'
   }
 });
