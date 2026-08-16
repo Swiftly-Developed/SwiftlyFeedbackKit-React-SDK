@@ -1,15 +1,15 @@
 import React from 'react';
 import { renderHook, waitFor } from '@testing-library/react-native';
-import { FeedbackKitProvider } from '../provider';
+import { FeedbackProvider } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { useVote } from '../hooks/useVote';
 import { FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
 
-// Wrapper component for hooks
+// Wrapper component for hooks. (Repaired 2026-08-15: this file imported a
+// `FeedbackKitProvider` that provider.tsx never exported and passed a `projectId`
+// prop that is not in FeedbackProviderProps — see provider.test.tsx.)
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <FeedbackKitProvider apiKey="test-key" projectId="test-project">
-    {children}
-  </FeedbackKitProvider>
+  <FeedbackProvider apiKey="test-key">{children}</FeedbackProvider>
 );
 
 describe('useFeedbackList', () => {

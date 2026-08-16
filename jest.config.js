@@ -19,7 +19,12 @@ module.exports = {
       statements: 70,
     },
   },
+  // The JS SDK is a peerDependency and is not installed here, so it is mocked.
+  // ⚠️ This key must match what `src/` actually imports. It read `@feedbackkit/js`
+  // until 2026-08-15 — the package's name before it was renamed `feedbackkit-js` —
+  // so the mapping matched nothing and every suite failed to RESOLVE. That was
+  // invisible because `npm test` exits 0 even when jest runs zero tests.
   moduleNameMapper: {
-    '^@feedbackkit/js$': '<rootDir>/__mocks__/@feedbackkit/js.ts',
+    '^feedbackkit-js$': '<rootDir>/__mocks__/feedbackkit-js.ts',
   },
 };
