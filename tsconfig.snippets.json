@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "paths": {
+      "feedbackkit-js": ["../SwiftlyFeedbackKit-JS/src/index.ts"],
+      "feedbackkit-react-native": ["./src/index.ts"]
+    }
+  },
+  "include": ["docs/snippets/**/*.tsx"],
+  "exclude": []
+}

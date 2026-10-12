@@ -21,7 +21,7 @@ import { useComments } from '../hooks/useComments';
 import { StatusBadge } from './StatusBadge';
 import { CategoryBadge } from './CategoryBadge';
 import { VoteButton } from './VoteButton';
-import { t } from '../i18n';
+import { layoutDirection, t } from '../i18n';
 
 export interface FeedbackDetailViewProps {
   /** The feedback item to display */
@@ -79,6 +79,7 @@ export function FeedbackDetailView({
     comments,
     isLoading: commentsLoading,
     error: commentsError,
+    addError,
     refetch: refetchComments,
     addComment,
     isAdding
@@ -94,7 +95,8 @@ export function FeedbackDetailView({
       await addComment(trimmed);
       setCommentText('');
     } catch {
-      // Error handling is in the hook
+      // addError on the hook is what this screen renders. The text stays so the
+      // sender can retry.
     }
   };
 
@@ -105,8 +107,12 @@ export function FeedbackDetailView({
 
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: theme.backgroundColor }, style]}
-      contentContainerStyle={styles.content}
+      style={[
+        styles.container,
+        { backgroundColor: theme.backgroundColor, direction: layoutDirection() },
+        style
+      ]}
+      contentContainerStyle={[styles.content, { direction: layoutDirection() }]}
       keyboardShouldPersistTaps="handled"
     >
       {/* Header: Badges + Vote Button */}
@@ -191,6 +197,12 @@ export function FeedbackDetailView({
             )}
           </TouchableOpacity>
         </View>
+
+        {addError ? (
+          <Text style={[styles.commentsErrorText, { color: theme.errorColor }]}>
+            {t('feedback.detail.comments.sendError')}
+          </Text>
+        ) : null}
 
         {/* Comments List */}
         {commentsLoading ? (

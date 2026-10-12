@@ -3,6 +3,7 @@
  */
 
 import { FeedbackStatus, FeedbackCategory } from 'feedbackkit-js';
+import { t } from '../i18n';
 
 /**
  * Status colors mapping
@@ -122,7 +123,7 @@ export function mergeTheme(base: Theme, overrides?: Partial<Theme>): Theme {
  * Get color for a feedback status
  */
 export function getStatusColor(status: FeedbackStatus, theme: Theme): string {
-  const colorMap: Record<FeedbackStatus, keyof StatusColors> = {
+  const colorMap: Record<string, keyof StatusColors> = {
     [FeedbackStatus.Pending]: 'pending',
     [FeedbackStatus.Approved]: 'approved',
     [FeedbackStatus.InProgress]: 'inProgress',
@@ -130,28 +131,29 @@ export function getStatusColor(status: FeedbackStatus, theme: Theme): string {
     [FeedbackStatus.Completed]: 'completed',
     [FeedbackStatus.Rejected]: 'rejected'
   };
-  return theme.statusColors[colorMap[status]];
+  const key = colorMap[status];
+  return key ? theme.statusColors[key] : theme.secondaryTextColor;
 }
 
 /**
  * Get color for a feedback category
  */
 export function getCategoryColor(category: FeedbackCategory, theme: Theme): string {
-  const colorMap: Record<FeedbackCategory, keyof CategoryColors> = {
+  const colorMap: Record<string, keyof CategoryColors> = {
     [FeedbackCategory.FeatureRequest]: 'featureRequest',
     [FeedbackCategory.BugReport]: 'bugReport',
     [FeedbackCategory.Improvement]: 'improvement',
     [FeedbackCategory.Other]: 'other'
   };
-  return theme.categoryColors[colorMap[category]];
+  const key = colorMap[category];
+  return key ? theme.categoryColors[key] : theme.secondaryTextColor;
 }
 
 /**
  * Get display name for a status
  */
 export function getStatusDisplayName(status: FeedbackStatus): string {
-  const { t } = require('../i18n');
-  const keys: Record<FeedbackStatus, string> = {
+  const keys: Record<string, string> = {
     [FeedbackStatus.Pending]: 'status.pending',
     [FeedbackStatus.Approved]: 'status.approved',
     [FeedbackStatus.InProgress]: 'status.inProgress',
@@ -159,19 +161,20 @@ export function getStatusDisplayName(status: FeedbackStatus): string {
     [FeedbackStatus.Completed]: 'status.completed',
     [FeedbackStatus.Rejected]: 'status.rejected'
   };
-  return t(keys[status]);
+  const key = keys[status];
+  return key ? t(key) : status;
 }
 
 /**
  * Get display name for a category
  */
 export function getCategoryDisplayName(category: FeedbackCategory): string {
-  const { t } = require('../i18n');
-  const keys: Record<FeedbackCategory, string> = {
+  const keys: Record<string, string> = {
     [FeedbackCategory.FeatureRequest]: 'category.featureRequest',
     [FeedbackCategory.BugReport]: 'category.bugReport',
     [FeedbackCategory.Improvement]: 'category.improvement',
     [FeedbackCategory.Other]: 'category.other'
   };
-  return t(keys[category]);
+  const key = keys[category];
+  return key ? t(key) : category;
 }

@@ -106,6 +106,15 @@ export function getLocale(): string {
 }
 
 /**
+ * Layout direction for the active locale. Arabic is right-to-left.
+ * This stays on the library's own views. It does not change the host app's
+ * `I18nManager` setting.
+ */
+export function layoutDirection(locale: string = currentLocale): 'ltr' | 'rtl' {
+  return locale.split('-')[0] === 'ar' ? 'rtl' : 'ltr';
+}
+
+/**
  * Register custom translations for a locale.
  * These are merged with built-in translations.
  */
@@ -122,6 +131,11 @@ export function registerTranslations(locale: string, strings: TranslationMap): v
  */
 export function setOverrideStrings(strings: TranslationMap): void {
   overrideStrings = { ...overrideStrings, ...strings };
+}
+
+/** Drops consumer overrides. Built-in catalogs are unchanged. */
+export function clearOverrideStrings(): void {
+  overrideStrings = {};
 }
 
 export { en } from './strings';

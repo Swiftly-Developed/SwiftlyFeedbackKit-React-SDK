@@ -17,7 +17,11 @@ export {
   useFeedback,
   useVote,
   useComments,
-  useSubmitFeedback
+  useSubmitFeedback,
+  useMetrics,
+  useMetricsTimeseries,
+  useMetricsBreakdown,
+  useMetricsEvents
 } from './hooks';
 
 // Components
@@ -57,5 +61,6 @@ export {
   getLocale,
   registerTranslations,
   setOverrideStrings,
+  clearOverrideStrings,
   en
 } from './i18n';

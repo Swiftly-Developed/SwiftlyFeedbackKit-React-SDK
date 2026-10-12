@@ -5,7 +5,7 @@
  */
 
 import React, { createContext, useContext, useMemo, useEffect, useState } from 'react';
-import { FeedbackKit, FeedbackKitConfig } from 'feedbackkit-js';
+import { FeedbackKit } from 'feedbackkit-js';
 import { Theme, defaultTheme, mergeTheme } from './styles/theme';
 import { getUserId, setUserId as persistUserId } from './utils/storage';
 import { setLocale, setOverrideStrings } from './i18n';
@@ -25,6 +25,11 @@ export interface FeedbackProviderProps {
   baseUrl?: string;
   /** Current user ID (optional, will be persisted) */
   userId?: string;
+  /**
+   * Server-side credential for admin replies.
+   * Leave unset in an end-user app. `useComments`'s admin reply requires it.
+   */
+  bearerToken?: string;
   /** Theme customization */
   theme?: FeedbackKitTheme;
   /** Override locale (auto-detected from device by default) */
@@ -49,6 +54,11 @@ export interface FeedbackKitContextValue {
   theme: Theme;
   /** Whether the provider is initialized */
   isInitialized: boolean;
+  /**
+   * True when `bearerToken` was passed to the provider. The token itself stays
+   * on the client. End-user apps leave this false and cannot post admin replies.
+   */
+  canPostAdminReply: boolean;
 }
 
 const FeedbackKitContext = createContext<FeedbackKitContextValue | null>(null);
@@ -60,7 +70,7 @@ const FeedbackKitContext = createContext<FeedbackKitContextValue | null>(null);
  *
  * @example
  * ```tsx
- * import { FeedbackProvider } from '@feedbackkit/react-native';
+ * import { FeedbackProvider } from 'feedbackkit-react-native';
  *
  * export default function App() {
  *   return (
@@ -81,6 +91,7 @@ export function FeedbackProvider({
   apiKey,
   baseUrl,
   userId: initialUserId,
+  bearerToken,
   theme: themeOverrides,
   locale,
   translations,
@@ -94,48 +105,56 @@ export function FeedbackProvider({
     return new FeedbackKit({
       apiKey,
       baseUrl,
-      userId
+      userId: initialUserId,
+      bearerToken
     });
-  }, [apiKey, baseUrl]);
+  }, [apiKey, baseUrl, initialUserId, bearerToken]);
 
   // Merge theme
   const theme = useMemo(() => {
     return mergeTheme(defaultTheme, themeOverrides);
   }, [themeOverrides]);
 
-  // Apply locale and translation overrides
-  useEffect(() => {
-    if (locale) setLocale(locale);
-  }, [locale]);
+  // Applied during render, before children, so the first paint and a later
+  // locale prop both see the strings. An effect would run after children and
+  // would not re-render them, because these setters are module state.
+  if (locale) setLocale(locale);
+  if (translations) setOverrideStrings(translations);
 
+  // Load persisted user ID when the provider has no userId prop. A prop that
+  // arrives while storage is still reading cancels the in-flight read so the
+  // stored value cannot replace the one the caller just passed.
   useEffect(() => {
-    if (translations) setOverrideStrings(translations);
-  }, [translations]);
-
-  // Load persisted user ID on mount
-  useEffect(() => {
+    let cancelled = false;
     async function loadUserId() {
       if (!initialUserId) {
         const persistedUserId = await getUserId();
+        if (cancelled) return;
         if (persistedUserId) {
           setUserIdState(persistedUserId);
           client.setUserId(persistedUserId);
         }
       }
-      setIsInitialized(true);
+      if (!cancelled) setIsInitialized(true);
     }
     loadUserId();
-  }, []);
+    return () => {
+      cancelled = true;
+    };
+  }, [client, initialUserId]);
 
   // Update client when userId changes
   useEffect(() => {
     client.setUserId(userId);
   }, [userId, client]);
 
-  // Update userId when prop changes
+  // Update userId when prop changes, and persist it. A prop-only id used to
+  // live in memory until `setUserId`, so a later launch without the prop had
+  // nothing in storage.
   useEffect(() => {
     if (initialUserId !== undefined) {
       setUserIdState(initialUserId);
+      void persistUserId(initialUserId);
     }
   }, [initialUserId]);
 
@@ -151,7 +170,8 @@ export function FeedbackProvider({
     userId,
     setUserId,
     theme,
-    isInitialized
+    isInitialized,
+    canPostAdminReply: Boolean(bearerToken)
   };
 
   return (

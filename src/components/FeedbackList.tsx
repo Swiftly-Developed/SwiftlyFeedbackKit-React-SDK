@@ -4,7 +4,7 @@
  * Scrollable list of feedback items.
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   FlatList,
   View,
@@ -19,7 +19,7 @@ import { Feedback, FeedbackStatus, FeedbackCategory, FeedbackSort } from 'feedba
 import { useFeedbackKitContext } from '../provider';
 import { useFeedbackList } from '../hooks/useFeedbackList';
 import { FeedbackCard } from './FeedbackCard';
-import { t } from '../i18n';
+import { layoutDirection, t } from '../i18n';
 
 export interface FeedbackListProps {
   /** Called when a feedback item is pressed */
@@ -88,6 +88,28 @@ export function FeedbackList({
 
   const activeSort = filter.sort ?? FeedbackSort.Votes;
 
+  // Props are the source of truth for status and category. `sortBy` is applied
+  // only when the caller passes it, so a chip the user tapped is kept.
+  // Returning the same filter object skips the state update and the extra fetch.
+  useEffect(() => {
+    setFilter((current) => {
+      const nextSort = sortBy !== undefined ? sortBy : current.sort;
+      if (
+        current.status === filterByStatus &&
+        current.category === filterByCategory &&
+        current.sort === nextSort
+      ) {
+        return current;
+      }
+      return {
+        ...current,
+        status: filterByStatus,
+        category: filterByCategory,
+        sort: nextSort
+      };
+    });
+  }, [filterByStatus, filterByCategory, sortBy, setFilter]);
+
   const handleSortChange = (sort: FeedbackSort) => {
     setFilter({ ...filter, sort });
   };
@@ -139,6 +161,8 @@ export function FeedbackList({
         {showAddButton && onAddPress && (
           <TouchableOpacity
             onPress={onAddPress}
+            accessibilityRole="button"
+            accessibilityLabel={t('feedback.submit.title')}
             style={[
               styles.addButtonEmpty,
               { backgroundColor: theme.primaryColor, borderRadius: theme.borderRadius }
@@ -163,6 +187,9 @@ export function FeedbackList({
             <TouchableOpacity
               key={option.value}
               onPress={() => handleSortChange(option.value)}
+              accessibilityRole="button"
+              accessibilityLabel={t(option.labelKey)}
+              accessibilityState={{ selected: isActive }}
               style={[
                 styles.sortChip,
                 {
@@ -187,7 +214,13 @@ export function FeedbackList({
   ) : null;
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.backgroundColor }, style]}>
+    <View
+      style={[
+        styles.container,
+        { backgroundColor: theme.backgroundColor, direction: layoutDirection() },
+        style
+      ]}
+    >
       <FlatList
         data={feedbacks}
         renderItem={renderItem}
@@ -202,6 +235,18 @@ export function FeedbackList({
           <>
             {ListHeaderComponent}
             {sortPicker}
+            {error && feedbacks.length > 0 ? (
+              <View style={styles.centerContainer}>
+                <Text style={[styles.errorText, { color: theme.errorColor }]}>
+                  {error.message}
+                </Text>
+                <TouchableOpacity onPress={refetch} style={styles.retryButton}>
+                  <Text style={[styles.retryText, { color: theme.primaryColor }]}>
+                    {t('feedback.list.error.retry')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            ) : null}
           </>
         }
         ListEmptyComponent={renderEmpty}
@@ -219,13 +264,15 @@ export function FeedbackList({
       {showAddButton && onAddPress && feedbacks.length > 0 && (
         <TouchableOpacity
           onPress={onAddPress}
+          accessibilityRole="button"
+          accessibilityLabel={t('feedback.submit.title')}
           style={[
             styles.fab,
             {
               backgroundColor: theme.primaryColor,
               borderRadius: 28,
               bottom: theme.spacing * 2,
-              right: theme.spacing * 2
+              end: theme.spacing * 2
             }
           ]}
           activeOpacity={0.8}

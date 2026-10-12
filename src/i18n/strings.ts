@@ -25,6 +25,7 @@ export const en: Record<string, string> = {
   'feedback.detail.comments.sending': 'Sending...',
   'feedback.detail.comments.loading': 'Loading comments...',
   'feedback.detail.comments.error': 'Failed to load comments',
+  'feedback.detail.comments.sendError': 'Could not send your comment',
   'feedback.detail.anonymous': 'Anonymous',
   'feedback.detail.submitted': 'Submitted %@',
 

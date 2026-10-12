@@ -18,7 +18,7 @@ import {
 import { Feedback, FeedbackCategory } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useSubmitFeedback } from '../hooks/useSubmitFeedback';
-import { t } from '../i18n';
+import { layoutDirection, t } from '../i18n';
 import { getCategoryColor, getCategoryDisplayName } from '../styles/theme';
 
 export interface SubmitFeedbackViewProps {
@@ -108,8 +108,12 @@ export function SubmitFeedbackView({
 
   return (
     <ScrollView
-      style={[styles.container, { backgroundColor: theme.backgroundColor }, style]}
-      contentContainerStyle={styles.content}
+      style={[
+        styles.container,
+        { backgroundColor: theme.backgroundColor, direction: layoutDirection() },
+        style
+      ]}
+      contentContainerStyle={[styles.content, { direction: layoutDirection() }]}
       keyboardShouldPersistTaps="handled"
     >
       {/* Title Heading */}
@@ -342,6 +346,9 @@ function Checkbox({ checked, onToggle, label, color, textColor }: CheckboxProps)
       onPress={onToggle}
       style={styles.checkboxRow}
       activeOpacity={0.7}
+      accessibilityRole="checkbox"
+      accessibilityState={{ checked }}
+      accessibilityLabel={label}
     >
       <View
         style={[
@@ -419,7 +426,7 @@ const styles = StyleSheet.create({
     marginTop: 12
   },
   subCheckboxes: {
-    marginLeft: 28,
+    marginStart: 28,
     marginTop: 4,
     gap: 4
   },
@@ -435,7 +442,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 8
+    marginEnd: 8
   },
   checkmark: {
     color: '#FFFFFF',
