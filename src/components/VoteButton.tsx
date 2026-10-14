@@ -4,7 +4,7 @@
  * Button for voting/unvoting on feedback.
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -16,6 +16,24 @@ import {
 import { Feedback, FeedbackStatus } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useVote } from '../hooks/useVote';
+import { t } from '../i18n';
+
+/**
+ * Statuses a voter may still vote on. Unknown tokens are excluded: a future
+ * status must be added here before the button enables it. Mirrors the Swift
+ * SDK's `FeedbackStatus.canVote` inclusion list.
+ */
+const VOTABLE_STATUSES: ReadonlySet<string> = new Set([
+  FeedbackStatus.Pending,
+  FeedbackStatus.Approved,
+  FeedbackStatus.InProgress,
+  FeedbackStatus.TestFlight,
+]);
+
+/** The one can-vote predicate. The Showcase vote capsule reads it too. */
+export function canVoteOnStatus(status: FeedbackStatus): boolean {
+  return VOTABLE_STATUSES.has(status);
+}
 
 export interface VoteButtonProps {
   /** The feedback to vote on */
@@ -55,10 +73,18 @@ export function VoteButton({
   const [localHasVoted, setLocalHasVoted] = useState(feedback.hasVoted);
   const [localVoteCount, setLocalVoteCount] = useState(feedback.voteCount);
 
-  // Check if voting is allowed
-  const canVote =
-    feedback.status !== FeedbackStatus.Completed &&
-    feedback.status !== FeedbackStatus.Rejected;
+  // The button keeps its own count so a vote response can paint before the
+  // parent refetches. A later `feedback` prop (a list refresh, a new row)
+  // replaces that local copy.
+  useEffect(() => {
+    setLocalHasVoted(feedback.hasVoted);
+    setLocalVoteCount(feedback.voteCount);
+  }, [feedback.id, feedback.hasVoted, feedback.voteCount]);
+
+  const canVote = canVoteOnStatus(feedback.status);
+  const accessibleName = showCount
+    ? `${t(localHasVoted ? 'button.voted' : 'button.vote')}, ${localVoteCount}`
+    : t(localHasVoted ? 'button.voted' : 'button.vote');
 
   const handlePress = async () => {
     if (!canVote || isVoting) return;
@@ -94,6 +120,9 @@ export function VoteButton({
 
   return (
     <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel={accessibleName}
+      accessibilityState={{ disabled: !canVote || isVoting }}
       onPress={handlePress}
       disabled={!canVote || isVoting}
       style={[

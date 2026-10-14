@@ -25,6 +25,7 @@ export const en: Record<string, string> = {
   'feedback.detail.comments.sending': 'Sending...',
   'feedback.detail.comments.loading': 'Loading comments...',
   'feedback.detail.comments.error': 'Failed to load comments',
+  'feedback.detail.comments.sendError': 'Could not send your comment',
   'feedback.detail.anonymous': 'Anonymous',
   'feedback.detail.submitted': 'Submitted %@',
 
@@ -84,6 +85,43 @@ export const en: Record<string, string> = {
   'sort.newest': 'Newest',
   'sort.oldest': 'Oldest',
   'sort.comments': 'Most Comments',
+
+  // Showcase list: plural category names, used where a filter names a set
+  'category.featureRequest.plural': 'Feature Requests',
+  'category.bugReport.plural': 'Bug Reports',
+  'category.improvement.plural': 'Improvements',
+  'category.other.plural': 'Other',
+
+  // Showcase list: Sort & Filter
+  'list.sortAndFilter': 'Sort & Filter',
+  'list.sortBy': 'Sort By',
+  'list.filter': 'Filter',
+  'list.filter.status': 'Status',
+  'list.filter.category': 'Category',
+  'list.filter.allStatuses': 'All Statuses',
+  'list.filter.allCategories': 'All Categories',
+  'list.filter.clearAll': 'Clear Filters',
+  'list.filter.clear': 'Clear',
+  'list.filter.summary': 'Filtered by %@',
+  'list.filter.join': '%1$@ · %2$@',
+  'list.filter.empty.title': 'No Matching Requests',
+  'list.filter.empty.description': 'No requests match the selected filters.',
+  'list.done': 'Done',
+  'list.loading': 'Loading feedback',
+
+  // Showcase list: vote capsule and card accessibility
+  'vote.count.one': '%d vote',
+  'vote.count.other': '%d votes',
+  'a11y.vote.voted': 'Voted',
+  'a11y.vote.notVoted': 'Not voted',
+  'a11y.vote.closed': 'Voting is closed',
+  'a11y.vote.hint': 'Adds your vote',
+  'a11y.vote.unvoteHint': 'Removes your vote',
+  'a11y.vote.lockedHint': "You've voted. Votes can't be removed",
+  'a11y.vote.action': 'Vote',
+  'a11y.vote.unvoteAction': 'Remove vote',
+  'a11y.card.hint': 'View details',
+  'a11y.filter.clearAction': 'Clear filters',
 
   // Errors
   'error.title': 'Error',

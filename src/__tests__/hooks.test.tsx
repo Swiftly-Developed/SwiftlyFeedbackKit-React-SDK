@@ -27,7 +27,6 @@ describe('useFeedbackList', () => {
         useFeedbackList({
           status: FeedbackStatus.Approved,
           category: FeedbackCategory.FeatureRequest,
-          limit: 10,
         }),
       { wrapper }
     );

@@ -92,6 +92,19 @@ export function t(key: string): string {
 }
 
 /**
+ * Fill a catalog template. Positional `%1$@`/`%2$d` arguments are taken by index, so
+ * a translation can reorder them; bare `%@`/`%d` take the next argument in turn.
+ */
+export function formatString(template: string, ...args: Array<string | number>): string {
+  let next = 0;
+  return template.replace(/%(?:(\d+)\$)?([@d])/g, (_match, position: string | undefined) => {
+    const index = position !== undefined ? Number(position) - 1 : next++;
+    const value = args[index];
+    return value === undefined ? '' : String(value);
+  });
+}
+
+/**
  * Set the current locale.
  */
 export function setLocale(locale: string): void {
@@ -103,6 +116,15 @@ export function setLocale(locale: string): void {
  */
 export function getLocale(): string {
   return currentLocale;
+}
+
+/**
+ * Layout direction for the active locale. Arabic is right-to-left.
+ * This stays on the library's own views. It does not change the host app's
+ * `I18nManager` setting.
+ */
+export function layoutDirection(locale: string = currentLocale): 'ltr' | 'rtl' {
+  return locale.split('-')[0] === 'ar' ? 'rtl' : 'ltr';
 }
 
 /**
@@ -122,6 +144,11 @@ export function registerTranslations(locale: string, strings: TranslationMap): v
  */
 export function setOverrideStrings(strings: TranslationMap): void {
   overrideStrings = { ...overrideStrings, ...strings };
+}
+
+/** Drops consumer overrides. Built-in catalogs are unchanged. */
+export function clearOverrideStrings(): void {
+  overrideStrings = {};
 }
 
 export { en } from './strings';

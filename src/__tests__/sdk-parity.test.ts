@@ -49,8 +49,15 @@ function withoutComments(source: string): string {
 }
 
 describe('QA-UNIT10 -13 · RN single-definition guard (client vocabulary)', () => {
-  /** The base error class, its seven subclasses, the three response/value types, the
-   *  config type, and the client class — everything RN must import, never redeclare. */
+  /** The base error class, its EIGHT subclasses (`RateLimitError` joined them), the three
+   *  response/value types, the config type, the client class, and the whole metrics
+   *  vocabulary — everything RN must import, never redeclare.
+   *
+   *  The metrics entries are not decoration: `useMetrics` consumes a paid, tier-scoped
+   *  surface, and a local `MetricsMeta` would type-check against RN's hand-written jest
+   *  mock while disagreeing with the server. The case below this one derives the metrics
+   *  names from the JS barrel and asserts this array covers them, so a type the JS SDK
+   *  adds later cannot silently escape the sweep. */
   const GUARDED_NAMES = [
     'FeedbackKitError',
     'AuthenticationError',
@@ -59,13 +66,50 @@ describe('QA-UNIT10 -13 · RN single-definition guard (client vocabulary)', () =
     'NotFoundError',
     'ConflictError',
     'ValidationError',
+    'RateLimitError',
     'NetworkError',
     'VoteResponse',
     'SDKUser',
     'TrackedEvent',
     'FeedbackKitConfig',
-    'FeedbackKit'
+    'FeedbackKit',
+    'PaginationMeta',
+    'MetricMeasure',
+    'MetricGranularity',
+    'MetricDimension',
+    'MetricEventScope',
+    'MetricValues',
+    'MetricsMeta',
+    'MetricSummary',
+    'MetricSeriesPoint',
+    'MetricSeries',
+    'MetricBreakdownItem',
+    'MetricBreakdown',
+    'MetricEventList',
+    'MetricsQueryOptions',
+    'MetricsSeriesOptions',
+    'MetricsBreakdownOptions',
+    'MetricsEventsOptions'
   ];
+
+  /** Names the JS SDK's barrel exports, comment-stripped. Read as SOURCE rather than
+   *  imported, because importing `feedbackkit-js` from a test resolves to RN's mock. */
+  const jsBarrelExports = (): string[] => {
+    const barrel = withoutComments(
+      readFileSync(
+        join(srcRoot, '..', '..', 'SwiftlyFeedbackKit-JS', 'src', 'index.ts'),
+        'utf8'
+      )
+    );
+    const names: string[] = [];
+    for (const match of barrel.matchAll(/export\s+(?:type\s+)?\{([^}]*)\}/g)) {
+      for (const raw of match[1].split(',')) {
+        const name = raw.trim();
+        if (name) names.push(name);
+      }
+    }
+    return names;
+  };
 
   it('declares none of the shared client vocabulary anywhere under src/', () => {
     const offenders: string[] = [];
@@ -93,6 +137,27 @@ describe('QA-UNIT10 -13 · RN single-definition guard (client vocabulary)', () =
     // `__mocks__/feedbackkit-js.ts` DOES declare these names — it must, as the stand-in
     // for an uninstalled peer dependency — and it is outside src/ and skipped.)
     expect(sourceFiles(srcRoot).length).toBeGreaterThan(15);
+  });
+
+  it('the guard covers every metrics name the JS barrel exports, derived not retyped', () => {
+    // Retyping the vocabulary here would make this array a second hand-maintained list of
+    // the JS type surface — the exact drift class this whole file exists to prevent.
+    const exported = jsBarrelExports();
+    const metricsNames = exported.filter(
+      (name) => name.startsWith('Metric') || name === 'PaginationMeta'
+    );
+
+    const unguarded = metricsNames.filter((name) => !GUARDED_NAMES.includes(name));
+    expect(unguarded).toEqual([]);
+
+    // Non-vacuity, both halves: the barrel really parsed, and it really carries the
+    // metrics family. A regex that matched nothing would satisfy the check above.
+    expect(exported.length).toBeGreaterThan(20);
+    expect(metricsNames.length).toBeGreaterThan(10);
+    expect(metricsNames).toContain('MetricsMeta');
+    // The error family the guard also covers grew by one in phase 02.
+    expect(exported).toContain('RateLimitError');
+    expect(GUARDED_NAMES).toContain('RateLimitError');
   });
 
   it('re-exports the JS SDK wholesale and imports VoteResponse at the consuming hook', () => {
@@ -159,5 +224,105 @@ describe('QA-UNIT10 -19 · RN theme field census', () => {
     expect(darkTheme.borderColor).not.toBe(defaultTheme.borderColor);
     expect(darkTheme.statusColors).toEqual(defaultTheme.statusColors);
     expect(darkTheme.categoryColors).toEqual(defaultTheme.categoryColors);
+  });
+});
+
+describe('METRICS03 04 · RN hook barrel parity', () => {
+  const hooksDir = join(srcRoot, 'hooks');
+
+  /** Every hook MODULE on disk, derived from the directory rather than listed.
+   *
+   *  Deliberately NOT recursive. `hooks/internal/` holds the shared implementation the
+   *  four metrics hooks route through — an implementation detail, not an exported hook —
+   *  and excluding it is a decision, pinned in `metrics-operation-hooks.test.ts`, rather
+   *  than a side effect of this filter. A `.ts` file added directly in `src/hooks/` is
+   *  still a hook and still has to appear in both barrels. */
+  const hookModules = (): string[] =>
+    readdirSync(hooksDir)
+      .filter((entry) => entry.endsWith('.ts') && entry !== 'index.ts')
+      .map((entry) => entry.replace(/\.tsx?$/, ''));
+
+  /** The hook NAMES a barrel block exports — types in the same block are ignored, since
+   *  `src/index.ts` re-exports the functions only. */
+  const hookNames = (block: string): string[] =>
+    block
+      .split(',')
+      .map((raw) => raw.trim())
+      .filter((name) => /^use[A-Z]/.test(name));
+
+  it('src/hooks/index.ts exports exactly the hook modules on disk', () => {
+    // Set equality, not containment: an eighth hook file nobody exported reddens here,
+    // and a presence check for `useMetrics` could never see it.
+    const barrel = withoutComments(readFileSync(join(hooksDir, 'index.ts'), 'utf8'));
+    const exported = hookNames(
+      [...barrel.matchAll(/export\s*\{([^}]*)\}/g)].map((m) => m[1]).join(',')
+    );
+
+    expect(exported.sort()).toEqual(hookModules().sort());
+    // Non-vacuity: the directory really has hooks and the barrel really parsed.
+    expect(hookModules().length).toBeGreaterThan(5);
+    expect(exported).toContain('useMetrics');
+  });
+
+  it('the package barrel re-exports exactly the same hook set', () => {
+    const rootBarrel = withoutComments(readFileSync(join(srcRoot, 'index.ts'), 'utf8'));
+    const block = /export\s*\{([^}]*)\}\s*from\s*'\.\/hooks'/.exec(rootBarrel);
+    expect(block).not.toBeNull();
+
+    expect(hookNames(block ? block[1] : '').sort()).toEqual(hookModules().sort());
+  });
+
+  /** Each metrics hook, and the operation-specific vocabulary it must IMPORT rather
+   *  than redeclare. The four option types are the whole reason these are four hooks and
+   *  not one parameterised one: `breakdown` requires a `dimension` that `summary` has no
+   *  field for, and the event feed's result puts the window/scope block under `metrics`
+   *  where the other three put it under `meta`. A hook holding a local twin of any of
+   *  these would type-check against RN's hand-written jest mock while disagreeing with
+   *  the server, which is exactly what the sweep above exists to prevent. */
+  const METRICS_HOOK_TYPES: Array<[string, string[]]> = [
+    ['useMetrics.ts', ['MetricSummary', 'MetricsQueryOptions']],
+    ['useMetricsTimeseries.ts', ['MetricSeries', 'MetricsSeriesOptions']],
+    ['useMetricsBreakdown.ts', ['MetricBreakdown', 'MetricsBreakdownOptions']],
+    ['useMetricsEvents.ts', ['MetricEventList', 'MetricsEventsOptions']]
+  ];
+
+  it('every metrics hook imports its types from feedbackkit-js and declares none', () => {
+    // Same shape as the `VoteResponse` assertion above: RN's parity story is that it
+    // imports the vocabulary rather than owning a twin.
+    for (const [file, names] of METRICS_HOOK_TYPES) {
+      const hook = withoutComments(readFileSync(join(hooksDir, file), 'utf8'));
+      for (const name of [...names, 'FeedbackKitError']) {
+        expect(hook).toMatch(
+          new RegExp(`import\\s*\\{[^}]*\\b${name}\\b[^}]*\\}\\s*from\\s*'feedbackkit-js'`)
+        );
+      }
+    }
+    // Non-vacuity: a table that lost its rows would satisfy the loop above silently.
+    expect(METRICS_HOOK_TYPES).toHaveLength(4);
+  });
+
+  it('the metrics hooks cover all four operations the JS client exposes', () => {
+    // The METRICS03 §22 parity claim, read off source rather than asserted in prose:
+    // one hook per key-family operation, derived from the JS SDK's own MetricsApi.
+    const api = withoutComments(
+      readFileSync(
+        join(srcRoot, '..', '..', 'SwiftlyFeedbackKit-JS', 'src', 'api', 'metrics.ts'),
+        'utf8'
+      )
+    );
+    const operations = [...api.matchAll(/^\s{2}async\s+(\w+)\s*\(/gm)].map((m) => m[1]);
+    expect(operations.sort()).toEqual(['breakdown', 'events', 'summary', 'timeseries']);
+
+    // Every operation is reached by exactly one hook, and no hook reaches two.
+    const calls = new Map<string, string>();
+    for (const [file] of METRICS_HOOK_TYPES) {
+      const hook = withoutComments(readFileSync(join(hooksDir, file), 'utf8'));
+      const reached = operations.filter((op) =>
+        new RegExp(`client\\.metrics\\.${op}\\b`).test(hook)
+      );
+      expect(reached).toHaveLength(1);
+      calls.set(reached[0], file);
+    }
+    expect([...calls.keys()].sort()).toEqual(operations.sort());
   });
 });

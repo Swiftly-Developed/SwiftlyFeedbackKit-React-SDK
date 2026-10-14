@@ -1,0 +1,2403 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Showcase at large text sizes matches the filter row snapshot at fontScale 2 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "flexDirection": "row",
+      "gap": 8,
+      "paddingStart": 4,
+    }
+  }
+  testID="fbk-filter-summary"
+>
+  <View
+    accessibilityElementsHidden={true}
+    accessible={false}
+    importantForAccessibility="no-hide-descendants"
+    style={
+      [
+        {
+          "height": 36,
+          "width": 36,
+        },
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+        },
+        undefined,
+      ]
+    }
+    testID="fbk-icon-filterActive"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#007AFF",
+          "borderRadius": 16.560000000000002,
+          "gap": 2.88,
+          "height": 33.120000000000005,
+          "justifyContent": "center",
+          "width": 33.120000000000005,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 1.5,
+            "height": 3,
+            "width": 18,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 1.5,
+            "height": 3,
+            "width": 11.52,
+          }
+        }
+      />
+      <View
+        style={
+          {
+            "backgroundColor": "#FFFFFF",
+            "borderRadius": 1.5,
+            "height": 3,
+            "width": 5.040000000000001,
+          }
+        }
+      />
+    </View>
+  </View>
+  <Text
+    accessibilityActions={
+      [
+        {
+          "label": "Clear filters",
+          "name": "clear",
+        },
+      ]
+    }
+    accessibilityLabel="Filtered by Bug Reports · In Progress"
+    accessible={true}
+    onAccessibilityAction={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        {
+          "color": "#000000",
+          "fontSize": 15,
+        },
+      ]
+    }
+  >
+    Filtered by 
+    <Text
+      style={
+        {
+          "fontWeight": "700",
+        }
+      }
+    >
+      Bug Reports · In Progress
+    </Text>
+  </Text>
+  <View
+    accessibilityLabel="Clear filters"
+    accessibilityRole="button"
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "paddingHorizontal": 8,
+        },
+        {
+          "minHeight": 44,
+          "minWidth": 44,
+          "opacity": 1,
+        },
+      ]
+    }
+    testID="fbk-filter-clear"
+  >
+    <Text
+      style={
+        [
+          {
+            "fontWeight": "700",
+          },
+          {
+            "color": "#0068D9",
+            "fontSize": 15,
+          },
+        ]
+      }
+    >
+      Clear
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Showcase at large text sizes matches the snapshot at fontScale 1 (iOS, light) 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "activate",
+      },
+      {
+        "label": "Remove vote",
+        "name": "unvote",
+      },
+    ]
+  }
+  accessibilityHint="View details"
+  accessibilityLabel="In Progress, Offline mode with background sync for long trips, Let me read and draft feedback without a connection, then sync later., Improvement, 24 comments, 1,860 votes, Voted"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": false,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 20,
+        "elevation": 0,
+        "padding": 18,
+      },
+      null,
+      undefined,
+    ]
+  }
+  testID="fbk-feedback-card-fb-1"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "gap": 6,
+      }
+    }
+  >
+    <View
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "borderColor": "#FF9500",
+            "borderRadius": 6.5,
+            "borderWidth": 1.625,
+            "height": 13,
+            "width": 13,
+          },
+          null,
+        ]
+      }
+      testID="fbk-status-glyph-in_progress"
+    >
+      <View
+        style={
+          {
+            "bottom": undefined,
+            "height": 6.5,
+            "left": -1.625,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": -1.625,
+            "width": 6.5,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 6.5,
+              "height": 13,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 13,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "bottom": -1.625,
+            "height": 6.5,
+            "left": -1.625,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": undefined,
+            "width": 6.5,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 6.5,
+              "height": 13,
+              "left": 0,
+              "position": "absolute",
+              "top": -6.5,
+              "width": 13,
+            }
+          }
+        />
+      </View>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#A66100",
+          "flexShrink": 1,
+          "fontSize": 13,
+          "fontWeight": "600",
+        }
+      }
+    >
+      In Progress
+    </Text>
+  </View>
+  <Text
+    accessibilityRole="header"
+    style={
+      [
+        {
+          "marginTop": 8,
+        },
+        {
+          "color": "#000000",
+          "fontSize": 20,
+          "fontWeight": "600",
+        },
+        null,
+      ]
+    }
+  >
+    Offline mode with background sync for long trips
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "marginTop": 4,
+        },
+        {
+          "color": "#727276",
+          "fontSize": 15,
+        },
+      ]
+    }
+  >
+    Let me read and draft feedback without a connection, then sync later.
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "columnGap": 12,
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "space-between",
+        "marginTop": 14,
+        "rowGap": 8,
+      }
+    }
+    testID="fbk-card-footer-fb-1"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "columnGap": 14,
+          "flexDirection": "row",
+          "flexShrink": 1,
+          "flexWrap": "wrap",
+          "rowGap": 4,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 16,
+                "width": 16,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-tune"
+        >
+          <View
+            style={
+              {
+                "height": 9.92,
+                "justifyContent": "space-between",
+                "width": 12,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 0.75,
+                  "height": 1.5,
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 0.75,
+                    "height": 4.38,
+                    "left": 6.6000000000000005,
+                    "position": "absolute",
+                    "top": -1.44,
+                    "width": 1.5,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 0.75,
+                  "height": 1.5,
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 0.75,
+                    "height": 4.38,
+                    "left": 1.7999999999999998,
+                    "position": "absolute",
+                    "top": -1.44,
+                    "width": 1.5,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 0.75,
+                  "height": 1.5,
+                  "width": 12,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 0.75,
+                    "height": 4.38,
+                    "left": 4.5600000000000005,
+                    "position": "absolute",
+                    "top": -1.44,
+                    "width": 1.5,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 13,
+            }
+          }
+        >
+          Improvement
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 16,
+                "width": 16,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-comment"
+        >
+          <View
+            style={
+              {
+                "height": 11.84,
+                "width": 12.48,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "borderColor": "#727276",
+                  "borderRadius": 1.92,
+                  "borderWidth": 1.5,
+                  "height": 9.6,
+                  "width": 12.48,
+                }
+              }
+            />
+            <View
+              style={
+                {
+                  "borderEndColor": "transparent",
+                  "borderEndWidth": 2.72,
+                  "borderTopColor": "#727276",
+                  "borderTopWidth": 2.72,
+                  "bottom": 0,
+                  "height": 0,
+                  "position": "absolute",
+                  "start": 1.92,
+                  "width": 0,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 13,
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            }
+          }
+        >
+          24
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityHint="Removes your vote"
+      accessibilityLabel="1,860 votes"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": "Voted",
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "borderRadius": 999,
+            "justifyContent": "center",
+          },
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
+          },
+          {
+            "backgroundColor": "#007AFF",
+            "minHeight": 36,
+            "minWidth": 44,
+            "opacity": 1,
+            "paddingHorizontal": 14,
+          },
+        ]
+      }
+      testID="fbk-vote-capsule-fb-1"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        accessible={false}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          [
+            {
+              "height": 15,
+              "width": 15,
+            },
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+        testID="fbk-icon-arrowUp"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#FFFFFF",
+                "borderBottomWidth": 5.1000000000000005,
+                "borderLeftColor": "transparent",
+                "borderLeftWidth": 4.8,
+                "borderRightColor": "transparent",
+                "borderRightWidth": 4.8,
+                "height": 0,
+                "width": 0,
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 0.5,
+                "height": 6,
+                "width": 2.4,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 15,
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        1,860
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Showcase at large text sizes matches the snapshot at fontScale 2 (Android, light) 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "activate",
+      },
+      {
+        "label": "Remove vote",
+        "name": "unvote",
+      },
+    ]
+  }
+  accessibilityHint="View details"
+  accessibilityLabel="In Progress, Offline mode with background sync for long trips, Let me read and draft feedback without a connection, then sync later., Improvement, 24 comments, 1,860 votes, Voted"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": false,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 12,
+        "elevation": 1,
+        "padding": 16,
+      },
+      null,
+      undefined,
+    ]
+  }
+  testID="fbk-feedback-card-fb-1"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "gap": 6,
+      }
+    }
+  >
+    <View
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "borderColor": "#FF9500",
+            "borderRadius": 12,
+            "borderWidth": 3,
+            "height": 24,
+            "width": 24,
+          },
+          null,
+        ]
+      }
+      testID="fbk-status-glyph-in_progress"
+    >
+      <View
+        style={
+          {
+            "bottom": undefined,
+            "height": 12,
+            "left": -3,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": -3,
+            "width": 12,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 12,
+              "height": 24,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 24,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "bottom": -3,
+            "height": 12,
+            "left": -3,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": undefined,
+            "width": 12,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 12,
+              "height": 24,
+              "left": 0,
+              "position": "absolute",
+              "top": -12,
+              "width": 24,
+            }
+          }
+        />
+      </View>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#A66100",
+          "flexShrink": 1,
+          "fontSize": 12,
+          "fontWeight": "500",
+        }
+      }
+    >
+      In Progress
+    </Text>
+  </View>
+  <Text
+    accessibilityRole="header"
+    style={
+      [
+        {
+          "marginTop": 8,
+        },
+        {
+          "color": "#000000",
+          "fontSize": 22,
+          "fontWeight": "500",
+        },
+        null,
+      ]
+    }
+  >
+    Offline mode with background sync for long trips
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "marginTop": 4,
+        },
+        {
+          "color": "#727276",
+          "fontSize": 14,
+        },
+      ]
+    }
+  >
+    Let me read and draft feedback without a connection, then sync later.
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "columnGap": 12,
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "space-between",
+        "marginTop": 14,
+        "rowGap": 8,
+      }
+    }
+    testID="fbk-card-footer-fb-1"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "columnGap": 14,
+          "flexDirection": "row",
+          "flexShrink": 1,
+          "flexWrap": "wrap",
+          "rowGap": 4,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 30,
+                "width": 30,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-tune"
+        >
+          <View
+            style={
+              {
+                "height": 18.6,
+                "justifyContent": "space-between",
+                "width": 22.5,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.25,
+                  "height": 2.5,
+                  "width": 22.5,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.25,
+                    "height": 7.8999999999999995,
+                    "left": 12.375000000000002,
+                    "position": "absolute",
+                    "top": -2.6999999999999997,
+                    "width": 2.5,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.25,
+                  "height": 2.5,
+                  "width": 22.5,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.25,
+                    "height": 7.8999999999999995,
+                    "left": 3.375,
+                    "position": "absolute",
+                    "top": -2.6999999999999997,
+                    "width": 2.5,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.25,
+                  "height": 2.5,
+                  "width": 22.5,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.25,
+                    "height": 7.8999999999999995,
+                    "left": 8.55,
+                    "position": "absolute",
+                    "top": -2.6999999999999997,
+                    "width": 2.5,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 12,
+            }
+          }
+        >
+          Improvement
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 30,
+                "width": 30,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-comment"
+        >
+          <View
+            style={
+              {
+                "height": 22.2,
+                "width": 23.400000000000002,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "borderColor": "#727276",
+                  "borderRadius": 3.5999999999999996,
+                  "borderWidth": 2.5,
+                  "height": 18,
+                  "width": 23.400000000000002,
+                }
+              }
+            />
+            <View
+              style={
+                {
+                  "borderEndColor": "transparent",
+                  "borderEndWidth": 5.1000000000000005,
+                  "borderTopColor": "#727276",
+                  "borderTopWidth": 5.1000000000000005,
+                  "bottom": 0,
+                  "height": 0,
+                  "position": "absolute",
+                  "start": 3.5999999999999996,
+                  "width": 0,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 12,
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            }
+          }
+        >
+          24
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityHint="Removes your vote"
+      accessibilityLabel="1,860 votes"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": "Voted",
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "borderRadius": 999,
+            "justifyContent": "center",
+          },
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
+          },
+          {
+            "backgroundColor": "#007AFF",
+            "minHeight": 40,
+            "minWidth": 48,
+            "opacity": 1,
+            "paddingHorizontal": 16,
+          },
+        ]
+      }
+      testID="fbk-vote-capsule-fb-1"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        accessible={false}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          [
+            {
+              "height": 28,
+              "width": 28,
+            },
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+        testID="fbk-icon-arrowUp"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#FFFFFF",
+                "borderBottomWidth": 9.520000000000001,
+                "borderLeftColor": "transparent",
+                "borderLeftWidth": 8.96,
+                "borderRightColor": "transparent",
+                "borderRightWidth": 8.96,
+                "height": 0,
+                "width": 0,
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 0.7777777777777778,
+                "height": 11.200000000000001,
+                "width": 4.48,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 14,
+              "fontWeight": "500",
+            },
+          ]
+        }
+      >
+        1,860
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Showcase at large text sizes matches the snapshot at fontScale 2 (iOS, dark) 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "activate",
+      },
+      {
+        "label": "Remove vote",
+        "name": "unvote",
+      },
+    ]
+  }
+  accessibilityHint="View details"
+  accessibilityLabel="In Progress, Offline mode with background sync for long trips, Let me read and draft feedback without a connection, then sync later., Improvement, 24 comments, 1,860 votes, Voted"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": false,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "#1C1C1E",
+        "borderRadius": 20,
+        "elevation": 0,
+        "padding": 18,
+      },
+      null,
+      undefined,
+    ]
+  }
+  testID="fbk-feedback-card-fb-1"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "gap": 6,
+      }
+    }
+  >
+    <View
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "borderColor": "#FF9500",
+            "borderRadius": 13,
+            "borderWidth": 3.25,
+            "height": 26,
+            "width": 26,
+          },
+          null,
+        ]
+      }
+      testID="fbk-status-glyph-in_progress"
+    >
+      <View
+        style={
+          {
+            "bottom": undefined,
+            "height": 13,
+            "left": -3.25,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": -3.25,
+            "width": 13,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 13,
+              "height": 26,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 26,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "bottom": -3.25,
+            "height": 13,
+            "left": -3.25,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": undefined,
+            "width": 13,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 13,
+              "height": 26,
+              "left": 0,
+              "position": "absolute",
+              "top": -13,
+              "width": 26,
+            }
+          }
+        />
+      </View>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#FF9500",
+          "flexShrink": 1,
+          "fontSize": 13,
+          "fontWeight": "600",
+        }
+      }
+    >
+      In Progress
+    </Text>
+  </View>
+  <Text
+    accessibilityRole="header"
+    style={
+      [
+        {
+          "marginTop": 8,
+        },
+        {
+          "color": "#FFFFFF",
+          "fontSize": 20,
+          "fontWeight": "600",
+        },
+        null,
+      ]
+    }
+  >
+    Offline mode with background sync for long trips
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "marginTop": 4,
+        },
+        {
+          "color": "#8E8E93",
+          "fontSize": 15,
+        },
+      ]
+    }
+  >
+    Let me read and draft feedback without a connection, then sync later.
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "columnGap": 12,
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "space-between",
+        "marginTop": 14,
+        "rowGap": 8,
+      }
+    }
+    testID="fbk-card-footer-fb-1"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "columnGap": 14,
+          "flexDirection": "row",
+          "flexShrink": 1,
+          "flexWrap": "wrap",
+          "rowGap": 4,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 33,
+                "width": 33,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-tune"
+        >
+          <View
+            style={
+              {
+                "height": 20.46,
+                "justifyContent": "space-between",
+                "width": 24.75,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "backgroundColor": "#8E8E93",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#8E8E93",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 13.6125,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#8E8E93",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#8E8E93",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 3.7125,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#8E8E93",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#8E8E93",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 9.405,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#8E8E93",
+              "fontSize": 13,
+            }
+          }
+        >
+          Improvement
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 33,
+                "width": 33,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-comment"
+        >
+          <View
+            style={
+              {
+                "height": 24.419999999999998,
+                "width": 25.740000000000002,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "borderColor": "#8E8E93",
+                  "borderRadius": 3.96,
+                  "borderWidth": 2.75,
+                  "height": 19.8,
+                  "width": 25.740000000000002,
+                }
+              }
+            />
+            <View
+              style={
+                {
+                  "borderEndColor": "transparent",
+                  "borderEndWidth": 5.61,
+                  "borderTopColor": "#8E8E93",
+                  "borderTopWidth": 5.61,
+                  "bottom": 0,
+                  "height": 0,
+                  "position": "absolute",
+                  "start": 3.96,
+                  "width": 0,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#8E8E93",
+              "fontSize": 13,
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            }
+          }
+        >
+          24
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityHint="Removes your vote"
+      accessibilityLabel="1,860 votes"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": "Voted",
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "borderRadius": 999,
+            "justifyContent": "center",
+          },
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
+          },
+          {
+            "backgroundColor": "#007AFF",
+            "minHeight": 36,
+            "minWidth": 44,
+            "opacity": 1,
+            "paddingHorizontal": 14,
+          },
+        ]
+      }
+      testID="fbk-vote-capsule-fb-1"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        accessible={false}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          [
+            {
+              "height": 30,
+              "width": 30,
+            },
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+        testID="fbk-icon-arrowUp"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#FFFFFF",
+                "borderBottomWidth": 10.200000000000001,
+                "borderLeftColor": "transparent",
+                "borderLeftWidth": 9.6,
+                "borderRightColor": "transparent",
+                "borderRightWidth": 9.6,
+                "height": 0,
+                "width": 0,
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 0.8333333333333334,
+                "height": 12,
+                "width": 4.8,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 15,
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        1,860
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Showcase at large text sizes matches the snapshot at fontScale 2 (iOS, light) 1`] = `
+<View
+  accessibilityActions={
+    [
+      {
+        "name": "activate",
+      },
+      {
+        "label": "Remove vote",
+        "name": "unvote",
+      },
+    ]
+  }
+  accessibilityHint="View details"
+  accessibilityLabel="In Progress, Offline mode with background sync for long trips, Let me read and draft feedback without a connection, then sync later., Improvement, 24 comments, 1,860 votes, Voted"
+  accessibilityRole="button"
+  accessibilityState={
+    {
+      "busy": false,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    [
+      {
+        "backgroundColor": "#FFFFFF",
+        "borderRadius": 20,
+        "elevation": 0,
+        "padding": 18,
+      },
+      null,
+      undefined,
+    ]
+  }
+  testID="fbk-feedback-card-fb-1"
+>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "gap": 6,
+      }
+    }
+  >
+    <View
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      style={
+        [
+          {
+            "borderColor": "#FF9500",
+            "borderRadius": 13,
+            "borderWidth": 3.25,
+            "height": 26,
+            "width": 26,
+          },
+          null,
+        ]
+      }
+      testID="fbk-status-glyph-in_progress"
+    >
+      <View
+        style={
+          {
+            "bottom": undefined,
+            "height": 13,
+            "left": -3.25,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": -3.25,
+            "width": 13,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 13,
+              "height": 26,
+              "left": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": 26,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          {
+            "bottom": -3.25,
+            "height": 13,
+            "left": -3.25,
+            "overflow": "hidden",
+            "position": "absolute",
+            "right": undefined,
+            "top": undefined,
+            "width": 13,
+          }
+        }
+      >
+        <View
+          style={
+            {
+              "backgroundColor": "#FF9500",
+              "borderRadius": 13,
+              "height": 26,
+              "left": 0,
+              "position": "absolute",
+              "top": -13,
+              "width": 26,
+            }
+          }
+        />
+      </View>
+    </View>
+    <Text
+      style={
+        {
+          "color": "#A66100",
+          "flexShrink": 1,
+          "fontSize": 13,
+          "fontWeight": "600",
+        }
+      }
+    >
+      In Progress
+    </Text>
+  </View>
+  <Text
+    accessibilityRole="header"
+    style={
+      [
+        {
+          "marginTop": 8,
+        },
+        {
+          "color": "#000000",
+          "fontSize": 20,
+          "fontWeight": "600",
+        },
+        null,
+      ]
+    }
+  >
+    Offline mode with background sync for long trips
+  </Text>
+  <Text
+    style={
+      [
+        {
+          "marginTop": 4,
+        },
+        {
+          "color": "#727276",
+          "fontSize": 15,
+        },
+      ]
+    }
+  >
+    Let me read and draft feedback without a connection, then sync later.
+  </Text>
+  <View
+    style={
+      {
+        "alignItems": "center",
+        "columnGap": 12,
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+        "justifyContent": "space-between",
+        "marginTop": 14,
+        "rowGap": 8,
+      }
+    }
+    testID="fbk-card-footer-fb-1"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "columnGap": 14,
+          "flexDirection": "row",
+          "flexShrink": 1,
+          "flexWrap": "wrap",
+          "rowGap": 4,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 33,
+                "width": 33,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-tune"
+        >
+          <View
+            style={
+              {
+                "height": 20.46,
+                "justifyContent": "space-between",
+                "width": 24.75,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 13.6125,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 3.7125,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                {
+                  "backgroundColor": "#727276",
+                  "borderRadius": 1.375,
+                  "height": 2.75,
+                  "width": 24.75,
+                }
+              }
+            >
+              <View
+                style={
+                  {
+                    "backgroundColor": "#727276",
+                    "borderRadius": 1.375,
+                    "height": 8.69,
+                    "left": 9.405,
+                    "position": "absolute",
+                    "top": -2.9699999999999998,
+                    "width": 2.75,
+                  }
+                }
+              />
+            </View>
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 13,
+            }
+          }
+        >
+          Improvement
+        </Text>
+      </View>
+      <View
+        style={
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 4,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={true}
+          accessible={false}
+          importantForAccessibility="no-hide-descendants"
+          style={
+            [
+              {
+                "height": 33,
+                "width": 33,
+              },
+              {
+                "alignItems": "center",
+                "justifyContent": "center",
+              },
+              undefined,
+            ]
+          }
+          testID="fbk-icon-comment"
+        >
+          <View
+            style={
+              {
+                "height": 24.419999999999998,
+                "width": 25.740000000000002,
+              }
+            }
+          >
+            <View
+              style={
+                {
+                  "borderColor": "#727276",
+                  "borderRadius": 3.96,
+                  "borderWidth": 2.75,
+                  "height": 19.8,
+                  "width": 25.740000000000002,
+                }
+              }
+            />
+            <View
+              style={
+                {
+                  "borderEndColor": "transparent",
+                  "borderEndWidth": 5.61,
+                  "borderTopColor": "#727276",
+                  "borderTopWidth": 5.61,
+                  "bottom": 0,
+                  "height": 0,
+                  "position": "absolute",
+                  "start": 3.96,
+                  "width": 0,
+                }
+              }
+            />
+          </View>
+        </View>
+        <Text
+          style={
+            {
+              "color": "#727276",
+              "fontSize": 13,
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            }
+          }
+        >
+          24
+        </Text>
+      </View>
+    </View>
+    <View
+      accessibilityHint="Removes your vote"
+      accessibilityLabel="1,860 votes"
+      accessibilityRole="button"
+      accessibilityState={
+        {
+          "busy": false,
+          "checked": undefined,
+          "disabled": false,
+          "expanded": undefined,
+          "selected": true,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": "Voted",
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      hitSlop={
+        {
+          "bottom": 4,
+          "left": 4,
+          "right": 4,
+          "top": 4,
+        }
+      }
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        [
+          {
+            "alignSelf": "flex-start",
+            "borderRadius": 999,
+            "justifyContent": "center",
+          },
+          {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "gap": 6,
+          },
+          {
+            "backgroundColor": "#007AFF",
+            "minHeight": 36,
+            "minWidth": 44,
+            "opacity": 1,
+            "paddingHorizontal": 14,
+          },
+        ]
+      }
+      testID="fbk-vote-capsule-fb-1"
+    >
+      <View
+        accessibilityElementsHidden={true}
+        accessible={false}
+        importantForAccessibility="no-hide-descendants"
+        style={
+          [
+            {
+              "height": 30,
+              "width": 30,
+            },
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            undefined,
+          ]
+        }
+        testID="fbk-icon-arrowUp"
+      >
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "justifyContent": "center",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "borderBottomColor": "#FFFFFF",
+                "borderBottomWidth": 10.200000000000001,
+                "borderLeftColor": "transparent",
+                "borderLeftWidth": 9.6,
+                "borderRightColor": "transparent",
+                "borderRightWidth": 9.6,
+                "height": 0,
+                "width": 0,
+              }
+            }
+          />
+          <View
+            style={
+              {
+                "backgroundColor": "#FFFFFF",
+                "borderRadius": 0.8333333333333334,
+                "height": 12,
+                "width": 4.8,
+              }
+            }
+          />
+        </View>
+      </View>
+      <Text
+        style={
+          [
+            {
+              "fontVariant": [
+                "tabular-nums",
+              ],
+            },
+            {
+              "color": "#FFFFFF",
+              "fontSize": 15,
+              "fontWeight": "600",
+            },
+          ]
+        }
+      >
+        1,860
+      </Text>
+    </View>
+  </View>
+</View>
+`;

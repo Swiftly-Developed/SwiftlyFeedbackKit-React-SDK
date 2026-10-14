@@ -8,7 +8,13 @@
 export * from 'feedbackkit-js';
 
 // Provider
-export { FeedbackProvider, type FeedbackProviderProps, type FeedbackKitTheme, useFeedbackKitContext } from './provider';
+export {
+  FeedbackProvider,
+  type FeedbackProviderProps,
+  type FeedbackKitTheme,
+  type FeedbackKitColorScheme,
+  useFeedbackKitContext
+} from './provider';
 
 // Hooks
 export {
@@ -17,7 +23,11 @@ export {
   useFeedback,
   useVote,
   useComments,
-  useSubmitFeedback
+  useSubmitFeedback,
+  useMetrics,
+  useMetricsTimeseries,
+  useMetricsBreakdown,
+  useMetricsEvents
 } from './hooks';
 
 // Components
@@ -32,6 +42,9 @@ export {
   type FeedbackCardProps,
   FeedbackList,
   type FeedbackListProps,
+  type FeedbackListStyle,
+  type ShowcaseIconName,
+  type ShowcaseIconRenderer,
   SubmitFeedbackView,
   type SubmitFeedbackViewProps,
   FeedbackDetailView,
@@ -53,9 +66,11 @@ export {
 // Internationalization
 export {
   t,
+  formatString,
   setLocale,
   getLocale,
   registerTranslations,
   setOverrideStrings,
+  clearOverrideStrings,
   en
 } from './i18n';

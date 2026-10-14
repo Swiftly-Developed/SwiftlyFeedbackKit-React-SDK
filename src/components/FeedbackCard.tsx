@@ -17,7 +17,7 @@ import { useFeedbackKitContext } from '../provider';
 import { StatusBadge } from './StatusBadge';
 import { CategoryBadge } from './CategoryBadge';
 import { VoteButton } from './VoteButton';
-import { t } from '../i18n';
+import { layoutDirection, t } from '../i18n';
 
 export interface FeedbackCardProps {
   /** The feedback item to display */
@@ -65,34 +65,8 @@ export function FeedbackCard({
     onPress?.(feedback);
   };
 
-  const content = (
-    <View
-      style={[
-        styles.card,
-        {
-          backgroundColor: theme.cardBackgroundColor,
-          borderRadius: theme.borderRadius,
-          padding: theme.spacing * 2
-        },
-        style
-      ]}
-    >
-      <View style={styles.header}>
-        <View style={styles.badges}>
-          {showStatus && <StatusBadge status={feedback.status} size="small" />}
-          {showCategory && (
-            <CategoryBadge category={feedback.category} size="small" />
-          )}
-        </View>
-        {showVoteButton && (
-          <VoteButton
-            feedback={feedback}
-            onVoteChange={onVoteChange}
-            size="small"
-          />
-        )}
-      </View>
-
+  const details = (
+    <>
       <Text
         style={[styles.title, { color: theme.textColor }]}
         numberOfLines={2}
@@ -114,18 +88,53 @@ export function FeedbackCard({
           </Text>
         </View>
       )}
+    </>
+  );
+
+  const header = (
+    <View style={styles.header} pointerEvents="box-none">
+      <View style={styles.badges} pointerEvents="none">
+        {showStatus && <StatusBadge status={feedback.status} size="small" />}
+        {showCategory && (
+          <CategoryBadge category={feedback.category} size="small" />
+        )}
+      </View>
+      {showVoteButton && (
+        <VoteButton
+          feedback={feedback}
+          onVoteChange={onVoteChange}
+          size="small"
+        />
+      )}
     </View>
   );
 
-  if (onPress) {
-    return (
-      <TouchableOpacity onPress={handlePress} activeOpacity={0.7}>
-        {content}
-      </TouchableOpacity>
-    );
-  }
-
-  return content;
+  return (
+    <View
+      style={[
+        styles.card,
+        {
+          backgroundColor: theme.cardBackgroundColor,
+          borderRadius: theme.borderRadius,
+          padding: theme.spacing * 2,
+          direction: layoutDirection()
+        },
+        style
+      ]}
+    >
+      {onPress ? (
+        <TouchableOpacity
+          onPress={handlePress}
+          activeOpacity={0.7}
+          accessibilityRole="button"
+          accessibilityLabel={feedback.title}
+          style={StyleSheet.absoluteFill}
+        />
+      ) : null}
+      {header}
+      <View pointerEvents="none">{details}</View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

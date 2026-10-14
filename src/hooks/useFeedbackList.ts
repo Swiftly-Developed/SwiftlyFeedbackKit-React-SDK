@@ -4,7 +4,7 @@
  * Fetch and manage a list of feedback items.
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   Feedback,
   FeedbackStatus,
@@ -32,8 +32,13 @@ export interface UseFeedbackListResult {
   refetch: () => Promise<void>;
   /** Current filter */
   filter: FeedbackListFilter;
-  /** Update the filter */
-  setFilter: (filter: FeedbackListFilter) => void;
+  /**
+   * Update the filter. An updater function receives the current filter, so a
+   * caller can change one field without dropping the others.
+   */
+  setFilter: (
+    filter: FeedbackListFilter | ((current: FeedbackListFilter) => FeedbackListFilter)
+  ) => void;
 }
 
 /**
@@ -75,10 +80,14 @@ export function useFeedbackList(
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<FeedbackKitError | null>(null);
   const [filter, setFilter] = useState<FeedbackListFilter>(initialFilter);
+  // Bumped at the start of each read and again on unmount, so a slower response
+  // (or one that lands after the screen is gone) cannot paint over a newer one.
+  const requestId = useRef(0);
 
   const fetchFeedbacks = useCallback(async () => {
     if (!isInitialized) return;
 
+    const id = ++requestId.current;
     setIsLoading(true);
     setError(null);
 
@@ -89,11 +98,13 @@ export function useFeedbackList(
         includeMerged: filter.includeMerged,
         sort: filter.sort
       });
+      if (id !== requestId.current) return;
       setFeedbacks(result);
     } catch (err) {
+      if (id !== requestId.current) return;
       setError(err as FeedbackKitError);
     } finally {
-      setIsLoading(false);
+      if (id === requestId.current) setIsLoading(false);
     }
   }, [client, filter, isInitialized]);
 
@@ -101,6 +112,12 @@ export function useFeedbackList(
   useEffect(() => {
     fetchFeedbacks();
   }, [fetchFeedbacks]);
+
+  useEffect(() => {
+    return () => {
+      requestId.current += 1;
+    };
+  }, []);
 
   const refetch = useCallback(async () => {
     await fetchFeedbacks();

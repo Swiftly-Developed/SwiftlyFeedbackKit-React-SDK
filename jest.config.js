@@ -6,6 +6,13 @@ module.exports = {
     'node_modules/(?!(@react-native|react-native|@feedbackkit)/)',
   ],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+
+  // The `react-native` preset transforms a large tree through babel, and that work happens
+  // lazily inside the FIRST test that renders a component. On a cold jest cache — which is
+  // every `npm ci` and every CI run — that pushed `provider.test.tsx`'s opening `waitFor`
+  // past jest's 5000 ms default, so the suite was red on the first run and green on every
+  // run after. Nothing was hanging: warm, that same test takes ~0.5 s. Measured 2026-08-25.
+  testTimeout: 30000,
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
     '!src/**/*.d.ts',

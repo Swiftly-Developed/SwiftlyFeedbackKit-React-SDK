@@ -12,12 +12,10 @@ import { defaultTheme, getStatusColor } from '../styles/theme';
  * local status enum, the JS cases stop saying anything about React Native and nothing else in
  * the repo would notice.
  *
- * It carries the sixth entry in the can-vote census (finding **F1**). RN's rule is neither a
- * predicate nor a shared constant — it is an inline expression **in a component body**
- * (`VoteButton.tsx`), so there is nothing for a runtime test to call. It is asserted where it
- * lives, as source text, and the assertion is that it names exactly the terminal pair
- * `{completed, rejected}` — the same set the Swift SDK, the Vapor SDK, Kotlin and Flutter each
- * compute independently.
+ * It carries the sixth entry in the can-vote census (finding **F1**). As of 2026-10-11 the
+ * rule is `VOTABLE_STATUSES` in `VoteButton.tsx`: an inclusion list of `pending`, `approved`,
+ * `in_progress`, and `testflight`. An unknown token is not votable. The list is asserted as
+ * source text, and a second copy or a return to negating `completed` / `rejected` fails here.
  *
  * It also carries a `status → tint` declaration the spec's nine-site census does not name,
  * because that census counted `.swift` files only: `styles/theme.ts` maps all six statuses to
@@ -133,6 +131,84 @@ describe('QA-UNIT05 -11 · RN feedback type parity', () => {
   });
 });
 
+describe('QA-UNIT10 -13 · RN mock error-class surface (METRICS03 04)', () => {
+  // ⚠️ ADDED 2026-08-25. The enum gate above shipped while a DIFFERENT drift in the same
+  // file went unnoticed for months, because that gate reads enums and nothing else:
+  // `ValidationError` defaulted to 'Validation failed' and `NetworkError` to 'Network
+  // request failed' where the real classes say 'Validation error' and 'Network error',
+  // and `RateLimitError` (phase 02) was absent outright. Both were reconciled with this
+  // case; the case is what keeps them reconciled. Same reasoning as the enum gate: read
+  // the JS SDK's SOURCE, because importing it resolves back to the mock under test.
+
+  const errorsSource = readFileSync(
+    join(srcRoot, '..', '..', 'SwiftlyFeedbackKit-JS', 'src', 'models', 'errors.ts'),
+    'utf8'
+  );
+  const mockSource = readFileSync(
+    join(srcRoot, '..', '__mocks__', 'feedbackkit-js.ts'),
+    'utf8'
+  );
+
+  /** Exported ERROR class names, in file order: the base (which extends `Error`) and
+   *  every subclass of it. Derived from the `extends` clause rather than by excluding
+   *  known non-errors, so the mock's `FeedbackKit` client class drops out on its own and
+   *  a tenth error class does not need this helper edited. */
+  const classNames = (source: string): string[] =>
+    [
+      ...withoutComments(source).matchAll(
+        /export\s+class\s+([A-Za-z0-9_]+)\s+extends\s+(Error|FeedbackKitError)\b/g
+      )
+    ].map((m) => m[1]);
+
+  /** class name → the constructor's default `message`, or undefined when it has none
+   *  (the base class takes a required message). */
+  const defaultMessages = (source: string): Record<string, string | undefined> => {
+    const stripped = withoutComments(source);
+    const out: Record<string, string | undefined> = {};
+    const segments = stripped.split(/export\s+class\s+/).slice(1);
+    for (const segment of segments) {
+      const name = /^([A-Za-z0-9_]+)/.exec(segment);
+      if (!name) continue;
+      const body = segment.split('\n}')[0];
+      const message = /message\s*=\s*'((?:[^'\\]|\\.)*)'/.exec(body);
+      out[name[1]] = message ? message[1] : undefined;
+    }
+    return out;
+  };
+
+  it('the mock declares exactly the error classes the JS SDK exports', () => {
+    const shipped = classNames(errorsSource);
+    const mocked = classNames(mockSource);
+
+    // Set equality. A presence check for `RateLimitError` would not see the removal of
+    // `ConflictError`, and the count is derived from the JS file rather than pinned —
+    // phase 02 already moved it from 8 to 9.
+    expect(mocked.sort()).toEqual([...shipped].sort());
+    // Non-vacuity: the extractor really found classes on both sides.
+    expect(shipped.length).toBeGreaterThan(5);
+    expect(shipped).toContain('RateLimitError');
+  });
+
+  it('every error class carries the same default message in the mock as in the SDK', () => {
+    // This is where the two shipped drifts lived: the names matched and the messages did
+    // not, so a name-only gate would have stayed green through both.
+    const shipped = defaultMessages(errorsSource);
+    const mocked = defaultMessages(mockSource);
+
+    const divergent = classNames(errorsSource)
+      .filter((name) => shipped[name] !== mocked[name])
+      .map((name) => `${name}: SDK ${String(shipped[name])} / mock ${String(mocked[name])}`);
+
+    expect(divergent).toEqual([]);
+    // Non-vacuity: real messages were extracted, not a map of undefineds.
+    expect(shipped.ValidationError).toBe('Validation error');
+    expect(shipped.NetworkError).toBe('Network error');
+    expect(
+      Object.values(shipped).filter((message) => message !== undefined).length
+    ).toBeGreaterThan(5);
+  });
+});
+
 describe('QA-UNIT05 -06 · RN status tint map', () => {
   /** The canon in RN's vocabulary: the six semantic colours of root CLAUDE.md's
    *  Feedback Statuses table, as the hex literals `defaultTheme` declares. */
@@ -188,37 +264,32 @@ describe('QA-UNIT05 -09/-11 · RN can-vote census (finding F1)', () => {
     readFileSync(join(srcRoot, 'components', 'VoteButton.tsx'), 'utf8')
   );
 
-  it('the rule is an inline negation in a component body, naming exactly the terminal pair', () => {
-    // The whole expression IS the terminal set, because RN negates rather than including.
-    // Add `TestFlight` to it, or drop `Rejected`, and this reddens naming React Native — and
-    // nothing else in the workspace could see it, because there is no symbol to call.
-    const predicate = voteButton.split('const canVote =')[1]?.split('const handlePress')[0];
+  it('the rule is an inclusion list of the four votable statuses', () => {
+    const predicate = voteButton.split('const VOTABLE_STATUSES')[1]?.split('export function VoteButton')[0];
     expect(predicate).toBeDefined();
 
     const named = ['Pending', 'Approved', 'InProgress', 'TestFlight', 'Completed', 'Rejected']
       .filter((member) => predicate!.includes(`FeedbackStatus.${member}`));
 
-    expect(named.sort()).toEqual(['Completed', 'Rejected']);
-    // A negation, not an inclusion list — recorded as it ships. AGENTS.md requires an
-    // inclusion list; five of the six shipped declarations negate, and §20 owns the fix.
-    expect(predicate).toContain('!==');
-    expect(predicate).not.toContain('switch');
+    expect(named.sort()).toEqual(['Approved', 'InProgress', 'Pending', 'TestFlight']);
+    expect(predicate).not.toContain('!==');
   });
 
-  it('exactly one RN site reimplements the rule, and it is VoteButton', () => {
-    // A second inline copy in another component would be a declaration of the rule that no
-    // census names. The two `theme.ts` maps are excluded deliberately: they are keyed on the
-    // *whole* enum, not on the terminal pair, so they are tint/label maps rather than copies
-    // of the can-vote rule. Counting them here would make this assertion say nothing.
-    const offenders: string[] = [];
+  it('exactly one RN site declares the votable set, and none negate the terminal pair', () => {
+    const declarations: string[] = [];
+    const negations: string[] = [];
     for (const file of sourceFiles(srcRoot)) {
       const source = withoutComments(readFileSync(file, 'utf8'));
-      if (/status\s*!==\s*FeedbackStatus\.Completed/.test(source)) {
-        offenders.push(file.replace(srcRoot, 'src'));
+      if (source.includes('VOTABLE_STATUSES')) {
+        declarations.push(file.replace(srcRoot, 'src'));
+      }
+      if (/!==\s*FeedbackStatus\.Completed/.test(source)) {
+        negations.push(file.replace(srcRoot, 'src'));
       }
     }
 
-    expect(offenders).toHaveLength(1);
-    expect(offenders[0]).toContain('VoteButton.tsx');
+    expect(declarations).toHaveLength(1);
+    expect(declarations[0]).toContain('VoteButton.tsx');
+    expect(negations).toEqual([]);
   });
 });
