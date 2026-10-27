@@ -1,6 +1,6 @@
 {
   "name": "feedbackkit-react-native",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "FeedbackKit React Native SDK - Collect user feedback in your React Native apps",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
@@ -9,6 +9,7 @@
   "files": [
     "src",
     "lib",
+    "!lib/typescript/SwiftlyFeedbackKit-JS",
     "!**/__tests__",
     "!**/__fixtures__",
     "!**/__mocks__"
@@ -21,6 +22,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "build": "bob build",
+    "prepare": "bob build",
+    "prepublishOnly": "npm run clean && bob build",
     "clean": "rm -rf lib"
   },
   "keywords": [
@@ -37,7 +40,7 @@
     "type": "git",
     "url": "git+https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-React-SDK.git"
   },
-  "author": "Swiftly Developed <info@swiftly-developed.com>",
+  "author": "Swiftly Workspace BV <developers@getfeedbackkit.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-React-SDK/issues"
@@ -47,7 +50,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "feedbackkit-js": ">=1.0.0",
+    "feedbackkit-js": ">=2.2.0",
     "react": ">=18.0.0",
     "react-native": ">=0.70.0",
     "@react-native-async-storage/async-storage": ">=1.17.0"
@@ -76,10 +79,17 @@
     "output": "lib",
     "targets": [
       "commonjs",
-      "module"
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.build.json"
+        }
+      ]
     ]
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "types": "lib/typescript/SwiftlyFeedbackKit-RN/src/index.d.ts"
 }

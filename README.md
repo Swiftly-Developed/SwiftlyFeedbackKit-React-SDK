@@ -1,10 +1,10 @@
 # FeedbackKit React Native SDK
 
-> **Source version 2.1.0.** This README matches `package.json` in this repository. `npm install feedbackkit-react-native` still resolves **1.0.1** (9 February 2026), and npm `feedbackkit-js` is **1.0.1** as well. 1.0.1 has `FeedbackProvider` (no `projectId` prop), `submit`, `isAdding`, and `vote` with `email` and `notifyStatusChange`. It has the list, card, vote button, and badges. It does not include `SubmitFeedbackView`, `FeedbackDetailView`, metrics hooks, `FeedbackSort`, `sortBy`, locale props, or `bearerToken`, and it does not mint an anonymous user id. Samples that use those 2.1.0 APIs will not compile against 1.0.1.
+> **Source version 2.2.0.** This README matches `package.json` in this repository. `npm install feedbackkit-react-native` still resolves **1.0.1** (9 February 2026), and npm `feedbackkit-js` is **1.0.1** as well. 1.0.1 has `FeedbackProvider` (no `projectId` prop), `submit`, `isAdding`, and `vote` with `email` and `notifyStatusChange`. It has the list, card, vote button, and badges. It does not include `SubmitFeedbackView`, `FeedbackDetailView`, metrics hooks, `FeedbackSort`, `sortBy`, locale props, or `bearerToken`, and it does not mint an anonymous user id. Samples that use those 2.1.0 APIs will not compile against 1.0.1.
 >
-> Metrics hooks need `feedbackkit-js` >= 2.1.0 (`client.metrics`). That release is not on npm. The peer range is `>=1.0.0`, so an app that only uses the feedback hooks can stay on 1.0.1, and 2.1.0 of `feedbackkit-js` is accepted.
+> Requires `feedbackkit-js` >= 2.2.0 (peer range `>=2.2.0`), which is not on npm yet. The metrics hooks (`client.metrics`) arrived in `feedbackkit-js` 2.1.0.
 >
-> The public repository [SwiftlyFeedbackKit-React-SDK](https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-React-SDK) has this tree on `main` and as tag **2.1.0** (14 October 2026). Its earlier tag **1.2.0** (14 October 2026) includes the submit and detail views and locale props, and does not export the metrics hooks. Its `dev` branch is a stale, untagged sync (package version 1.2.2, 12 October 2026).
+> The public repository [SwiftlyFeedbackKit-React-SDK](https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-React-SDK) has this tree on `main` and as tag **2.2.0** (27 October 2026). Its earlier tag **1.2.0** (14 October 2026) includes the submit and detail views and locale props, and does not export the metrics hooks. Its `dev` branch is a stale, untagged sync (package version 1.2.2, 12 October 2026).
 >
 > Walkthrough: [docs/getting-started.md](docs/getting-started.md). The snippets in [docs/snippets/getting-started.tsx](docs/snippets/getting-started.tsx) are typechecked with `npx tsc -p tsconfig.snippets.json --noEmit`. There is no sample app in this package.
 

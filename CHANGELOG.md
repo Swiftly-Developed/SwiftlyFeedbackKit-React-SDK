@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+## [2.2.0] - 2026-10-27
+
+All FeedbackKit SDKs (Swift, JS, React Native, Kotlin, Flutter) now share one version number. The Vapor SDK keeps its own versioning.
+
+### Changed
+
+- **The npm package now ships compiled output.** `prepare` and `prepublishOnly` run `bob build`, so `lib/commonjs`, `lib/module` and the `.d.ts` type files (`types`: `lib/typescript/SwiftlyFeedbackKit-RN/src/index.d.ts`) are in the tarball. Before, `main` and `module` pointed at a `lib/` that was never built.
+- The contact addresses in the repository docs are now getfeedbackkit.com aliases: security@ in `SECURITY.md`, support@ in `SUPPORT.md`, hello@ in `CODE_OF_CONDUCT.md` and developers@ in `CONTRIBUTING.md`.
+- The package `author` email in `package.json` is now developers@getfeedbackkit.com.
+
 ## [2.1.0] - 2026-10-14
 
 ### Added
