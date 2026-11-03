@@ -252,11 +252,17 @@ export const __httpControl: {
   feedbackGet: null | ((id: string) => Promise<unknown>);
   commentsList: null | ((id: string) => Promise<unknown>);
   commentsCreate: null | ((id: string, body: unknown) => Promise<unknown>);
+  commentsDelete: null | ((id: string, commentId: string) => Promise<void>);
+  votesVote: null | ((id: string, body: unknown) => Promise<unknown>);
+  votesUnvote: null | ((id: string, body: unknown) => Promise<unknown>);
 } = {
   feedbackList: null,
   feedbackGet: null,
   commentsList: null,
   commentsCreate: null,
+  commentsDelete: null,
+  votesVote: null,
+  votesUnvote: null,
 };
 
 export function __resetHttpControl(): void {
@@ -264,6 +270,9 @@ export function __resetHttpControl(): void {
   __httpControl.feedbackGet = null;
   __httpControl.commentsList = null;
   __httpControl.commentsCreate = null;
+  __httpControl.commentsDelete = null;
+  __httpControl.votesVote = null;
+  __httpControl.votesUnvote = null;
 }
 
 // ============================================================================
@@ -284,8 +293,16 @@ export class FeedbackKit {
   };
 
   votes = {
-    vote: jest.fn().mockResolvedValue({ feedbackId: 'mock-feedback', hasVoted: true, voteCount: 1 }),
-    unvote: jest.fn().mockResolvedValue({ feedbackId: 'mock-feedback', hasVoted: false, voteCount: 0 }),
+    vote: jest.fn((id: string, body: unknown) =>
+      __httpControl.votesVote
+        ? __httpControl.votesVote(id, body)
+        : Promise.resolve({ feedbackId: 'mock-feedback', hasVoted: true, voteCount: 1 })
+    ),
+    unvote: jest.fn((id: string, body: unknown) =>
+      __httpControl.votesUnvote
+        ? __httpControl.votesUnvote(id, body)
+        : Promise.resolve({ feedbackId: 'mock-feedback', hasVoted: false, voteCount: 0 })
+    ),
   };
 
   comments = {
@@ -296,6 +313,11 @@ export class FeedbackKit {
       __httpControl.commentsCreate
         ? __httpControl.commentsCreate(id, body)
         : Promise.resolve({})
+    ),
+    delete: jest.fn((id: string, commentId: string) =>
+      __httpControl.commentsDelete
+        ? __httpControl.commentsDelete(id, commentId)
+        : Promise.resolve()
     ),
   };
 

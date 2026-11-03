@@ -26,6 +26,10 @@ export interface UseCommentsResult {
   addComment: (content: string, isAdmin?: boolean) => Promise<Comment>;
   /** Whether a comment is being added */
   isAdding: boolean;
+  /** Delete the current user's own comment */
+  deleteComment: (commentId: string) => Promise<void>;
+  /** Error from the latest `deleteComment` attempt. The comment stays in the list. */
+  deleteError: Error | null;
 }
 
 /**
@@ -69,6 +73,7 @@ export function useComments(feedbackId: string): UseCommentsResult {
   const [isAdding, setIsAdding] = useState(false);
   const [error, setError] = useState<FeedbackKitError | null>(null);
   const [addError, setAddError] = useState<Error | null>(null);
+  const [deleteError, setDeleteError] = useState<Error | null>(null);
   // Bumped at the start of each list read and again on unmount. `addComment`
   // appends to local state and is not part of this sequence.
   const requestId = useRef(0);
@@ -144,6 +149,22 @@ export function useComments(feedbackId: string): UseCommentsResult {
     [client, feedbackId, userId, canPostAdminReply]
   );
 
+  const deleteComment = useCallback(
+    async (commentId: string): Promise<void> => {
+      setDeleteError(null);
+
+      try {
+        await client.comments.delete(feedbackId, commentId);
+        setComments(prev => prev.filter(comment => comment.id !== commentId));
+      } catch (err) {
+        const failure = err instanceof Error ? err : new Error(String(err));
+        setDeleteError(failure);
+        throw err;
+      }
+    },
+    [client, feedbackId]
+  );
+
   return {
     comments,
     isLoading,
@@ -151,6 +172,8 @@ export function useComments(feedbackId: string): UseCommentsResult {
     addError,
     refetch,
     addComment,
-    isAdding
+    isAdding,
+    deleteComment,
+    deleteError
   };
 }

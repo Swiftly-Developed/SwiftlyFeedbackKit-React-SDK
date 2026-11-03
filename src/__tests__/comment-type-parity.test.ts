@@ -78,6 +78,17 @@ describe('QA-UNIT04 -11 · RN comment type parity', () => {
     expect(pkg.peerDependencies['feedbackkit-js']).toBeDefined();
   });
 
+  it('requires the feedbackkit-js release that adds comments.delete', () => {
+    // useComments' deleteComment calls comments.delete, which feedbackkit-js 2.3.0 adds.
+    // A lower floor lets npm resolve a JS SDK where that call is undefined at runtime.
+    const pkg = JSON.parse(
+      readFileSync(join(__dirname, '..', '..', 'package.json'), 'utf8')
+    );
+    expect(pkg.peerDependencies['feedbackkit-js']).toBe('>=2.3.0');
+    const hook = readFileSync(join(srcRoot, 'hooks', 'useComments.ts'), 'utf8');
+    expect(hook).toMatch(/comments\.delete\(/);
+  });
+
   it('reads only fields the JS Comment interface declares', () => {
     const detailView = readFileSync(
       join(srcRoot, 'components', 'FeedbackDetailView.tsx'),

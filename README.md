@@ -1,8 +1,8 @@
 # FeedbackKit React Native SDK
 
-> **Source version 2.2.0.** This README matches `package.json` in this repository. `npm install feedbackkit-react-native` still resolves **1.0.1** (9 February 2026), and npm `feedbackkit-js` is **1.0.1** as well. 1.0.1 has `FeedbackProvider` (no `projectId` prop), `submit`, `isAdding`, and `vote` with `email` and `notifyStatusChange`. It has the list, card, vote button, and badges. It does not include `SubmitFeedbackView`, `FeedbackDetailView`, metrics hooks, `FeedbackSort`, `sortBy`, locale props, or `bearerToken`, and it does not mint an anonymous user id. Samples that use those 2.1.0 APIs will not compile against 1.0.1.
+> **Source version 2.3.0.** This README matches `package.json` in this repository. `npm install feedbackkit-react-native` still resolves **1.0.1** (9 February 2026), and npm `feedbackkit-js` is **1.0.1** as well. 1.0.1 has `FeedbackProvider` (no `projectId` prop), `submit`, `isAdding`, and `vote` with `email` and `notifyStatusChange`. It has the list, card, vote button, and badges. It does not include `SubmitFeedbackView`, `FeedbackDetailView`, metrics hooks, `FeedbackSort`, `sortBy`, locale props, or `bearerToken`, and it does not mint an anonymous user id. Samples that use those 2.1.0 APIs will not compile against 1.0.1.
 >
-> Requires `feedbackkit-js` >= 2.2.0 (peer range `>=2.2.0`), which is not on npm yet. The metrics hooks (`client.metrics`) arrived in `feedbackkit-js` 2.1.0.
+> Requires `feedbackkit-js` >= 2.3.0 (peer range `>=2.3.0`), which is not on npm yet. The metrics hooks (`client.metrics`) arrived in `feedbackkit-js` 2.1.0.
 >
 > The public repository [SwiftlyFeedbackKit-React-SDK](https://github.com/Swiftly-Developed/SwiftlyFeedbackKit-React-SDK) has this tree on `main` and as tag **2.2.0** (27 October 2026). Its earlier tag **1.2.0** (14 October 2026) includes the submit and detail views and locale props, and does not export the metrics hooks. Its `dev` branch is a stale, untagged sync (package version 1.2.2, 12 October 2026).
 >

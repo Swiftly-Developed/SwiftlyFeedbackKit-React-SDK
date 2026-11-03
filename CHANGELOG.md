@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2026-11-03
+
+**Check before you upgrade.** `VoteButton` now shows an alert when a vote fails for any reason other than "already voted". It used to fail silently. This release needs `feedbackkit-js` 2.3.0 or later: the peer range is now `>=2.3.0`, because `deleteComment` calls `comments.delete`, which 2.3.0 adds.
+
+### Fixed
+
+- `useFeedbackList` and `useComments` get the page limit in the JS SDK: a proxy or cache that returns a stale or incomplete page can no longer make a list send requests without end. It needs `feedbackkit-js` 2.3.0.
+- `VoteButton` sends one request for two quick presses. If the server answers 409 because the vote already exists, the button refreshes its count.
+
+### Changed
+
+- ⚠️ **Behaviour change: `VoteButton` alerts when a vote fails.** Any failure other than a 409 now shows `Alert.alert` with the error, where the button used to stay silent. If your app already reports vote errors itself, users may now see both.
+
+### Added
+
+- `useComments` returns `deleteComment(commentId)` and `deleteError`, to delete the current user's own comment. It needs `feedbackkit-js` 2.3.0, which adds `comments.delete`.
+
 ## [2.2.0] - 2026-10-27
 
 All FeedbackKit SDKs (Swift, JS, React Native, Kotlin, Flutter) now share one version number. The Vapor SDK keeps its own versioning.

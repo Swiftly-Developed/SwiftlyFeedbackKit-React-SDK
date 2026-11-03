@@ -4,8 +4,9 @@
  * Button for voting/unvoting on feedback.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
+  Alert,
   TouchableOpacity,
   Text,
   StyleSheet,
@@ -13,7 +14,7 @@ import {
   ActivityIndicator,
   View
 } from 'react-native';
-import { Feedback, FeedbackStatus } from 'feedbackkit-js';
+import { ConflictError, Feedback, FeedbackStatus } from 'feedbackkit-js';
 import { useFeedbackKitContext } from '../provider';
 import { useVote } from '../hooks/useVote';
 import { t } from '../i18n';
@@ -68,8 +69,10 @@ export function VoteButton({
   showCount = true,
   size = 'medium'
 }: VoteButtonProps) {
-  const { theme } = useFeedbackKitContext();
+  const { client, theme } = useFeedbackKitContext();
   const { vote, unvote, isVoting } = useVote();
+  // `isVoting` is state, so a second press in the same render still reads it as false.
+  const inFlight = useRef(false);
   const [localHasVoted, setLocalHasVoted] = useState(feedback.hasVoted);
   const [localVoteCount, setLocalVoteCount] = useState(feedback.voteCount);
 
@@ -86,23 +89,38 @@ export function VoteButton({
     ? `${t(localHasVoted ? 'button.voted' : 'button.vote')}, ${localVoteCount}`
     : t(localHasVoted ? 'button.voted' : 'button.vote');
 
+  const applyAnswer = (hasVoted: boolean, voteCount: number) => {
+    setLocalHasVoted(hasVoted);
+    setLocalVoteCount(voteCount);
+    onVoteChange?.(hasVoted, voteCount);
+  };
+
+  const showFailure = (err: unknown) => {
+    const message = err instanceof Error && err.message ? err.message : t('error.generic');
+    Alert.alert(t('error.title'), message);
+  };
+
   const handlePress = async () => {
-    if (!canVote || isVoting) return;
+    if (!canVote || inFlight.current) return;
+    inFlight.current = true;
 
     try {
-      if (localHasVoted) {
-        const result = await unvote(feedback.id);
-        setLocalHasVoted(result.hasVoted);
-        setLocalVoteCount(result.voteCount);
-        onVoteChange?.(result.hasVoted, result.voteCount);
+      const result = localHasVoted ? await unvote(feedback.id) : await vote(feedback.id);
+      applyAnswer(result.hasVoted, result.voteCount);
+    } catch (err) {
+      if (err instanceof ConflictError) {
+        // The vote this press asked for is already stored. Show what the server has.
+        try {
+          const fresh = await client.feedback.get(feedback.id);
+          applyAnswer(fresh.hasVoted, fresh.voteCount);
+        } catch (refreshError) {
+          showFailure(refreshError);
+        }
       } else {
-        const result = await vote(feedback.id);
-        setLocalHasVoted(result.hasVoted);
-        setLocalVoteCount(result.voteCount);
-        onVoteChange?.(result.hasVoted, result.voteCount);
+        showFailure(err);
       }
-    } catch {
-      // Error handling is done in the hook
+    } finally {
+      inFlight.current = false;
     }
   };
 
